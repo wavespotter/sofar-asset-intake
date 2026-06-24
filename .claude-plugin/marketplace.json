@@ -1,0 +1,17 @@
+{
+  "name": "sofar-marketing",
+  "owner": {
+    "name": "Sofar Ocean Marketing",
+    "email": "marketing@sofarocean.com"
+  },
+  "description": "Sofar Ocean marketing plugins for Cowork.",
+  "plugins": [
+    {
+      "name": "sofar-asset-intake",
+      "source": "./",
+      "description": "Drop in a marketing asset and file it into the right Sofar Notion databases: Resource Library, Customer Testimonials, Statistics, and the Case Study Coverage Map.",
+      "category": "marketing",
+      "keywords": ["notion", "marketing", "intake", "resource-library", "testimonials", "statistics", "case-study"]
+    }
+  ]
+}
