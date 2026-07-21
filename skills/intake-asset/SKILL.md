@@ -12,7 +12,7 @@ description: >
   new featureable statistics into the Statistics Repository (conservatively, after
   confirmation, always under review).
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -80,8 +80,11 @@ do not create blindly. (A title match often catches a duplicate a URL check miss
 the asset's PDF is stored under `Drive Link` and the blog URL under `Link`.)
 
 If it's not a duplicate, then following `references/resource-library-schema.md`, fill Title,
-Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Link, Last
-Updated (today, via bash `date +%F`), and the Detailed description (for AI parsing). Create
+Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Third-Party?
+(Yes when the asset is published outside Sofar Ocean's own properties — third-party media,
+external blogs, research journals — else No), Source (the publication/outlet/journal name
+when Third-Party? = Yes; blank otherwise), Link, Last Updated (today, via bash `date +%F`),
+and the Detailed description (for AI parsing). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
