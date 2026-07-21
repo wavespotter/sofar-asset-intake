@@ -16,6 +16,8 @@ the intended set, but the live schema wins if they differ.
 | Content Type | select | Exactly one of the 11 values below. |
 | Smart Mooring Sensor(s) | multi_select | Sensors named; see rule. |
 | Use Case Category | multi_select | 1–3 primary, or empty for horizontal assets. |
+| Third-Party? | select | "Yes" or "No" — classify by publication venue; see rule. |
+| Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
 | Link | url | Canonical URL. |
 | Last Updated | date | Today's date (`date +%F`), set `date:Last Updated:start`. |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
@@ -93,6 +95,29 @@ Rules:
   Research**; habitat/MPA/biodiversity/coral/species → **Conservation & Marine
   Protection**; storm surge / sea level / shoreline / flood / coastal engineering →
   **Coastal Management**.
+
+## Third-Party? (select) and Source (rich_text)
+
+Third-Party? options: **Yes**, **No**. Classify by **where the asset is published**, not
+who it is about:
+
+- **Yes** — published somewhere other than Sofar Ocean's own properties: third-party
+  publications and media articles, blog posts on websites that are not Sofar Ocean's, and
+  research papers / scientific-journal articles not published by Sofar.
+- **No** — published by Sofar Ocean itself: sofarocean.com pages and blog posts,
+  Sofar-produced collateral, webinars, presentations, tools, and brand assets.
+- Always set one of the two. If the venue is genuinely unclear (e.g. an uploaded file with
+  no provenance), ask the user instead of guessing.
+
+Source:
+
+- When Third-Party? = **Yes**, set Source to the name of the publication, media outlet, or
+  journal — the venue, not the author (e.g. "ECO Magazine", "Nature Communications",
+  "gCaptain").
+- When Third-Party? = **No**, leave Source blank.
+
+Write format: both are plain strings, e.g. `"Third-Party?": "Yes"`,
+`"Source": "ECO Magazine"`.
 
 ## Summary (style)
 
