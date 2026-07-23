@@ -19,12 +19,13 @@ the intended set, but the live schema wins if they differ.
 | Third-Party? | select | "Yes" or "No" — classify by publication venue; see rule. |
 | Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
 | Link | url | Canonical URL. |
-| Last Updated | date | Today's date (`date +%F`), set `date:Last Updated:start`. |
+| Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
 
 Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
 `Drive Link` — unless the user explicitly asks. These are managed by people/other flows.
+`Created time` is system-managed by Notion (auto-filled on creation) and cannot be written.
 
 ## Write format
 
@@ -98,26 +99,43 @@ Rules:
 
 ## Third-Party? (select) and Source (rich_text)
 
-Third-Party? options: **Yes**, **No**. Classify by **where the asset is published**, not
-who it is about:
-
+**Third-Party?** options: Yes, No. Classify by **where the asset is published**, not who
+it is about:
 - **Yes** — published somewhere other than Sofar Ocean's own properties: third-party
-  publications and media articles, blog posts on websites that are not Sofar Ocean's, and
-  research papers / scientific-journal articles not published by Sofar.
+  publications and media articles, blog posts on websites that are not Sofar Ocean's,
+  and research papers / scientific-journal articles not published by Sofar.
 - **No** — published by Sofar Ocean itself: sofarocean.com pages and blog posts,
   Sofar-produced collateral, webinars, presentations, tools, and brand assets.
-- Always set one of the two. If the venue is genuinely unclear (e.g. an uploaded file with
-  no provenance), ask the user instead of guessing.
+- Always set one of the two. If the venue is genuinely unclear (e.g. an uploaded file
+  with no provenance), ask the user instead of guessing.
 
-Source:
-
-- When Third-Party? = **Yes**, set Source to the name of the publication, media outlet, or
+**Source:**
+- When Third-Party? = Yes, set Source to the name of the publication, media outlet, or
   journal — the venue, not the author (e.g. "ECO Magazine", "Nature Communications",
   "gCaptain").
-- When Third-Party? = **No**, leave Source blank.
+- When Third-Party? = No, leave Source blank.
 
 Write format: both are plain strings, e.g. `"Third-Party?": "Yes"`,
 `"Source": "ECO Magazine"`.
+
+## Last Updated rule
+
+Set `date:Last Updated:start` based on the kind of asset:
+
+- **Assets with a true, fixed publication date** — news articles, press releases, blog
+  posts, published papers, podcast/video episodes: use the **publication date**
+  (`YYYY-MM-DD`). When only month/year is known, use the first of the month; year only,
+  use January 1. Note the precision in the Detailed description if not exact.
+- **Living documents** — sales decks, one-pagers, FAQs, tools/demos, webpages,
+  enablement material, brand assets: use **today's date** (`date +%F`), i.e. the intake
+  date, since Last Updated signals content freshness for these.
+- **Publication date should exist but cannot be determined** (gated/paywalled article,
+  undated page): use today's date and add this note to the Detailed description:
+  "Publication date unknown; Last Updated reflects intake date."
+
+Rationale: intake time is captured automatically by Notion's built-in Created time
+property, so nothing is lost. For dated assets, sorting and filtering on Last Updated
+should reflect when the piece was published.
 
 ## Summary (style)
 
