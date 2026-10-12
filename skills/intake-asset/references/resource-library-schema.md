@@ -11,27 +11,33 @@ the intended set, but the live schema wins if they differ.
 | Property | Type | Notes |
 |---|---|---|
 | Title | title | The asset's real headline. |
-| Summary | rich_text | One short, factual sentence in house style. |
+| Summary | rich_text | One short, factual sentence in house style. Required for a Tool (shown on its tile); see "Internal tools". |
 | Product | multi_select | Spotter and/or Wayfinder. |
-| Content Type | select | Exactly one of the 11 values below. |
+| Content Type | select | Exactly one of the 12 values below. |
 | Smart Mooring Sensor(s) | multi_select | Sensors named; see rule. |
 | Use Case Category | multi_select | 1–3 primary, or empty for horizontal assets. |
 | Third-Party? | select | "Yes" or "No" — classify by publication venue; see rule. |
 | Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
-| Link | url | Canonical URL. |
+| Origin | select | "Official" (default) or "Field-Created"; see "Origin and Customer / Prospect". |
+| Customer / Prospect | rich_text | Account name. Only for field-created decks, and then always. |
+| Link | url | Canonical URL. For a field-created deck, its shareable Slides/Drive URL; for a Tool, its web address (required). |
 | Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
 
 Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
 `Drive Link` — unless the user explicitly asks. These are managed by people/other flows.
+Setting Drive Link never replaces Link: the library opens Link when someone clicks a card,
+and Drive Link only powers the Download button. For field-created decks in particular, leave
+`Publicly Shareable?` empty unless the user explicitly says the deck can go to customers.
 `Created time` is system-managed by Notion (auto-filled on creation) and cannot be written.
 
 ## Write format
 
 - Multi-selects are JSON-array strings, e.g. `"Product": "[\"Spotter\"]"`,
   `"Use Case Category": "[\"Offshore Renewables\",\"Coastal Management\"]"`.
-- Select is a plain string, e.g. `"Content Type": "Customer Story"`.
+- Select is a plain string, e.g. `"Content Type": "Customer Story"`, `"Origin": "Field-Created"`.
+- Text is a plain string, e.g. `"Customer / Prospect": "Acme Offshore Wind"`.
 - Date uses the expanded key: `"date:Last Updated:start": "2026-06-17"`.
 
 ## Product (multi_select)
@@ -42,11 +48,11 @@ Options: **Spotter**, **Wayfinder**.
 - **Wayfinder** = voyage optimization, routing, fuel savings, shipping operations.
 - Can be both, or neither (some brand/company assets have no product).
 
-## Content Type (select) — 11 values + disambiguation
+## Content Type (select) — 12 values + disambiguation
 
 `Article`, `Customer Story`, `Webinar / Video`, `Sales Collateral`,
 `Whitepaper / Research`, `Webpage / FAQ`, `Interactive Tool / Demo`, `Presentation`,
-`Enablement`, `Creative / Brand Asset`, `Other`.
+`Enablement`, `Creative / Brand Asset`, `Tool`, `Other`.
 
 - **Article** — blog posts, news, press releases, announcements.
 - **Customer Story** — case studies / customer success stories.
@@ -54,13 +60,62 @@ Options: **Spotter**, **Wayfinder**.
 - **Sales Collateral** — one-pagers, spec sheets, booklets, media kits.
 - **Whitepaper / Research** — academic papers, scientific studies, technical evaluations.
 - **Webpage / FAQ** — product webpages, FAQs, guides.
-- **Interactive Tool / Demo** — tools, dashboards, demos, configurators, calculators,
-  scenario builders, web apps, live dashboards, data archives/repositories.
-- **Presentation** — slide decks.
+- **Interactive Tool / Demo** — customer-facing tools, dashboards, demos, configurators,
+  calculators, scenario builders, web apps, live dashboards, data archives/repositories.
+  These stay in the main library.
+- **Tool**: internal web utilities that Sofar staff open and use rather than share, e.g. an
+  email signature generator or a quote calculator. These appear on a separate Tools tab. See
+  "Internal tools (Content Type = Tool)".
+- **Presentation** — slide decks, including field-created custom decks (there is no
+  "Custom Deck" type; never invent one).
 - **Enablement** — internal or partner enablement / sales-training / onboarding material.
 - **Creative / Brand Asset** — photo/video directories, logos, brand books, renderings,
   design files.
 - **Other** — only when nothing above fits.
+
+**Tool vs. Interactive Tool / Demo:** ask who uses it. Internal staff utility → Tool.
+Something customers see or use (demo, configurator, dashboard, dataset) → Interactive Tool /
+Demo. If a link could be either, ask the user whether it's an internal tool or something
+customers see.
+
+## Origin (select) and Customer / Prospect (rich_text)
+
+**Origin** options: Official, Field-Created. Always set one.
+- **Official** (the default): content marketing made or approved. This covers almost
+  everything, including Tools.
+- **Field-Created**: a custom deck a rep or the field team made for one specific customer or
+  prospect, which marketing hasn't reviewed. Signs: a company name in the title or file name,
+  "for [Company]", or the user saying it's their own deck.
+- If it's unclear whether the asset is field-created, or who it's for, ask the user before
+  filing. Don't guess.
+
+When Origin = Field-Created:
+- **Customer / Prospect**: always fill with the account name (e.g. "Acme Offshore Wind").
+  Leave it blank for Official assets.
+- **Content Type**: keep it as the kind of asset, usually Presentation. Never invent a
+  "Custom Deck" type.
+- **Link**: always the deck's shareable URL (e.g. the Google Slides or Drive link), not only
+  Drive Link. The library opens Link when someone clicks the card; Drive Link only powers the
+  Download button.
+- **Publicly Shareable?**: leave empty unless the user explicitly says the deck can go to
+  customers. The library treats field-created decks as internal-only unless it's Yes.
+- **Third-Party?**: No (the deck is Sofar-produced).
+- **Last Updated**: today's date (a deck is a living document).
+- Skip Testimonials and Statistics (SKILL.md Steps 4 and 5): the content hasn't been reviewed
+  by marketing.
+
+## Internal tools (Content Type = Tool)
+
+| Field | Rule |
+|---|---|
+| Link | **Required.** The tool's web address. |
+| Summary | **Required.** One or two plain sentences saying what the tool does; it's the description shown on the tool's tile. |
+| Product, Smart Mooring Sensor(s), Use Case Category, Stage in Buyer's Journey | Optional; usually blank. Fill only when clearly applicable (Stage in Buyer's Journey only if the user asks, as for any asset). |
+| Third-Party? | No. |
+| Origin | Official. |
+| Last Updated | Today's date (living document). |
+
+Skip SKILL.md Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map) for tools.
 
 ## Smart Mooring Sensor(s) (multi_select)
 
@@ -89,7 +144,8 @@ Rules:
 Rules:
 - Pick **1–3 genuinely primary** categories (max 4). Quality over quantity.
 - **Horizontal assets → leave empty**: general platform/company overviews, brand assets,
-  internal tools/demos/configurators/repositories not tied to a specific industry.
+  internal tools/demos/configurators/repositories not tied to a specific industry. (For
+  Content Type = Tool, this field is optional and usually blank.)
 - Wayfinder / voyage / fuel / routing content → **Shipping & Logistics**.
 - Customer stories and research papers almost always map to at least one category.
 - Disambiguation: research/academic/data/climate/oceanography → **Ocean Science &

@@ -3,16 +3,16 @@ name: intake-asset
 description: >
   This skill should be used when someone shares a marketing asset — a URL, pasted text,
   or an uploaded file (case study, blog, webinar, one-pager, press release, customer
-  story, spec sheet, tool/demo, podcast, slide deck, savings report, etc.) — and wants it
-  filed into Sofar Ocean's Notion databases. Trigger on phrases like "add this to the
-  resource library", "catalogue this asset", "log this resource", "intake this asset",
-  "add to Notion", "add this case study", "capture this testimonial/quote", or "add this
-  stat". The skill catalogues the asset in the Resource Library, extracts customer quotes
-  into the Customer Testimonials Repository (after confirmation), and surfaces genuinely
-  new featureable statistics into the Statistics Repository (conservatively, after
-  confirmation, always under review).
+  story, spec sheet, tool/demo, internal tool, podcast, slide deck, custom/field-created
+  deck, savings report, etc.) — and wants it filed into Sofar Ocean's Notion databases.
+  Trigger on phrases like "add this to the resource library", "catalogue this asset",
+  "log this resource", "intake this asset", "add to Notion", "add this case study",
+  "capture this testimonial/quote", or "add this stat". The skill catalogues the asset in
+  the Resource Library, extracts customer quotes into the Customer Testimonials
+  Repository (after confirmation), and surfaces genuinely new featureable statistics into
+  the Statistics Repository (conservatively, after confirmation, always under review).
 metadata:
-  version: "0.6.0"
+  version: "0.7.2"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -83,11 +83,49 @@ If it's not a duplicate, then following `references/resource-library-schema.md`,
 Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Third-Party?
 (Yes when the asset is published outside Sofar Ocean's own properties — third-party media,
 external blogs, research journals — else No), Source (the publication/outlet/journal name
-when Third-Party? = Yes; blank otherwise), Link, Last Updated (today, via bash `date +%F`),
+when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (field-created decks
+only), Link, Last Updated (today, via bash `date +%F`),
 and the Detailed description (for AI parsing). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
 
+Before filling the fields, settle two classifications (full rules in
+`references/resource-library-schema.md`):
+
+**Origin: Official or Field-Created.** Official is the default: use it for content marketing
+made or approved. Set Origin = "Field-Created" when the asset is a custom deck a rep or the
+field team made for one specific customer or prospect and marketing hasn't reviewed it. Signs
+include a company name in the title or file name, "for [Company]", or the user saying it's
+their own deck. For a field-created deck:
+- Always fill **Customer / Prospect** with the account name.
+- Keep **Content Type** as the kind of asset (usually Presentation). Never invent a
+  "Custom Deck" type.
+- Always put the deck's shareable URL (e.g. the Google Slides or Drive link) in **Link**,
+  not only in Drive Link. The library opens Link when someone clicks the card; Drive Link
+  only powers the Download button.
+- Leave **Publicly Shareable?** empty unless the user explicitly says the deck can go to
+  customers. The library treats field-created decks as internal-only unless it's Yes.
+- Skip Steps 4 and 5 (Testimonials and Statistics). The deck's content hasn't been reviewed
+  by marketing.
+
+If it's unclear whether the asset is field-created, or which account it's for, ask the user
+before filing. Don't guess.
+
+**Tool or Interactive Tool / Demo.** Use Content Type "Tool" for internal web utilities that
+Sofar staff open and use rather than share (e.g. an email signature generator or a quote
+calculator); Tools appear on a separate Tools tab. Use "Interactive Tool / Demo" only for
+customer-facing demos, configurators, dashboards and datasets, which stay in the main library.
+If a link could be either, ask the user whether it's an internal tool or something customers
+see. For a Tool:
+- **Link** (the tool's web address) is required.
+- **Summary** is required: one or two plain sentences saying what the tool does, because it's
+  the description shown on the tool's tile.
+- Product, Smart Mooring Sensor(s), Use Case Category and Stage in Buyer's Journey are
+  optional. Third-Party? = No.
+- Skip Steps 4, 5 and 6.
+
 ## Step 4 — Customer Testimonials (conditional, confirm first)
+
+Skip this step for field-created decks and for Tools.
 
 Per `references/testimonials-repository-schema.md`, decide whether the asset contains
 **genuine, attributable customer quotes**. If yes, draft a row per quote (Customer, Name,
@@ -99,6 +137,8 @@ duplicates) for the user's approval**, and only then create the approved, non-du
 (parent = Testimonials `data_source_id`). Never auto-apply "Do Not Use".
 
 ## Step 5 — Statistics (conditional, conservative, confirm first)
+
+Skip this step for field-created decks and for Tools.
 
 Per `references/statistics-repository-schema.md`, decide whether the asset introduces a
 **genuinely new, featureable, quantified company/product statistic** (e.g. a cumulative
@@ -120,7 +160,7 @@ If one exists:
 ## Step 6 — Case Study Coverage Map (conditional, Spotter customer stories, confirm first)
 
 Only when the Resource Library classification was **Product = Spotter** and **Content Type =
-"Customer Story"**. Otherwise skip this step entirely.
+"Customer Story"**. Otherwise skip this step entirely (it never runs for Tools).
 
 Run it for **every** Spotter customer story so the Coverage Map always reflects the case
 study, whether or not it is already listed. Per `references/coverage-map-schema.md`:
@@ -145,7 +185,11 @@ study, whether or not it is already listed. Per `references/coverage-map-schema.
 Give the user links to everything created: the Resource Library entry, any testimonial
 rows, any statistic candidate (noting it's under review), and any Case Study Coverage Map
 row (or a note that the case study was already mapped). Add a one-line note on how each was
-classified so the user can correct anything.
+classified so the user can correct anything. For the Resource Library entry, always say how
+Origin was set (Official, or Field-Created and for which Customer / Prospect, and why), and,
+for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
+(customer-facing) and why. If Steps 4 and 5 were skipped because the asset is a field-created
+deck or a Tool, say so.
 
 ## Notes
 
