@@ -19,8 +19,8 @@ the intended set, but the live schema wins if they differ.
 | Third-Party? | select | "Yes" or "No" — classify by publication venue; see rule. |
 | Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
 | Origin | select | "Official" (default) or "Field-Created"; see "Origin and Customer / Prospect". |
-| Customer / Prospect | rich_text | Account name. Only for field-created decks, and then always. |
-| Link | url | Canonical URL. For a field-created deck, its shareable Slides/Drive URL; for a Tool, its web address (required). |
+| Customer / Prospect | rich_text | Account name. Only for field-created assets made for a specific customer or prospect. |
+| Link | url | Canonical URL. For a field-created asset, its shareable Slides/Docs/Drive URL; for a Tool, its web address (required). |
 | Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
 
@@ -28,8 +28,8 @@ Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
 `Drive Link` — unless the user explicitly asks. These are managed by people/other flows.
 Setting Drive Link never replaces Link: the library opens Link when someone clicks a card,
-and Drive Link only powers the Download button. For field-created decks in particular, leave
-`Publicly Shareable?` empty unless the user explicitly says the deck can go to customers.
+and Drive Link only powers the Download button. For field-created assets in particular, leave
+`Publicly Shareable?` empty unless the user explicitly says the asset can go to customers.
 `Created time` is system-managed by Notion (auto-filled on creation) and cannot be written.
 
 ## Write format
@@ -66,8 +66,9 @@ Options: **Spotter**, **Wayfinder**.
 - **Tool**: internal web utilities that Sofar staff open and use rather than share, e.g. an
   email signature generator or a quote calculator. These appear on a separate Tools tab. See
   "Internal tools (Content Type = Tool)".
-- **Presentation** — slide decks, including field-created custom decks (there is no
-  "Custom Deck" type; never invent one).
+- **Presentation** — slide decks, including field-created custom decks. Field-created
+  assets use the same Content Types as Official ones; there is no "Custom" or "Field" type,
+  so never invent one.
 - **Enablement** — internal or partner enablement / sales-training / onboarding material.
 - **Creative / Brand Asset** — photo/video directories, logos, brand books, renderings,
   design files.
@@ -80,29 +81,34 @@ customers see.
 
 ## Origin (select) and Customer / Prospect (rich_text)
 
-**Origin** options: Official, Field-Created. Always set one.
-- **Official** (the default): content marketing made or approved. This covers almost
-  everything, including Tools.
-- **Field-Created**: a custom deck a rep or the field team made for one specific customer or
-  prospect, which marketing hasn't reviewed. Signs: a company name in the title or file name,
-  "for [Company]", or the user saying it's their own deck.
-- If it's unclear whether the asset is field-created, or who it's for, ask the user before
-  filing. Don't guess.
+**Origin** options: Official, Field-Created. Always set one. Origin is about who made the
+asset, not what kind of asset it is.
+- **Official** (the default): anything marketing made or approved. This covers almost
+  everything, including third-party articles and research that marketing has curated.
+- **Field-Created**: any asset a rep, the field team, or anyone outside marketing made, which
+  marketing hasn't reviewed. It can be any format: a deck, a one-pager, a proposal, a custom
+  savings report, a demo video, a spreadsheet, a tool. Signs: a company name in the title or
+  file name, "for [Company]", "my deck" or "a one-pager I made", or the user saying a rep or
+  someone on the field team made it.
+- Use judgment from those signs. Ask the user only when the asset could plausibly be either
+  and nothing points one way, or when it's clearly for one account but you can't tell which.
 
 When Origin = Field-Created:
-- **Customer / Prospect**: always fill with the account name (e.g. "Acme Offshore Wind").
-  Leave it blank for Official assets.
-- **Content Type**: keep it as the kind of asset, usually Presentation. Never invent a
-  "Custom Deck" type.
-- **Link**: always the deck's shareable URL (e.g. the Google Slides or Drive link), not only
-  Drive Link. The library opens Link when someone clicks the card; Drive Link only powers the
-  Download button.
-- **Publicly Shareable?**: leave empty unless the user explicitly says the deck can go to
-  customers. The library treats field-created decks as internal-only unless it's Yes.
-- **Third-Party?**: No (the deck is Sofar-produced).
-- **Last Updated**: today's date (a deck is a living document).
-- Skip Testimonials and Statistics (SKILL.md Steps 4 and 5): the content hasn't been reviewed
-  by marketing.
+- **Customer / Prospect**: fill with the account name (e.g. "Acme Offshore Wind") whenever
+  the asset was made for a specific customer or prospect. Leave it blank for a general asset
+  a rep made for reuse, and always blank for Official assets.
+- **Content Type**: the kind of asset it is, using the same rules as for Official assets
+  (Presentation for a deck, Sales Collateral for a one-pager or spec sheet, Webinar / Video
+  for a recording, and so on). Never invent a "Custom" or "Field" type.
+- **Link**: always the asset's shareable URL (e.g. the Google Slides, Docs or Drive link),
+  not only Drive Link. The library opens Link when someone clicks the card; Drive Link only
+  powers the Download button.
+- **Publicly Shareable?**: leave empty unless the user explicitly says the asset can go to
+  customers. The library treats field-created assets as internal-only unless it's Yes.
+- **Third-Party?**: No (the asset is Sofar-produced).
+- **Last Updated**: today's date (treat it as a living document).
+- Skip Testimonials, Statistics and the Coverage Map (SKILL.md Steps 4, 5 and 6): the content
+  hasn't been reviewed by marketing.
 
 ## Internal tools (Content Type = Tool)
 
@@ -112,7 +118,7 @@ When Origin = Field-Created:
 | Summary | **Required.** One or two plain sentences saying what the tool does; it's the description shown on the tool's tile. |
 | Product, Smart Mooring Sensor(s), Use Case Category, Stage in Buyer's Journey | Optional; usually blank. Fill only when clearly applicable (Stage in Buyer's Journey only if the user asks, as for any asset). |
 | Third-Party? | No. |
-| Origin | Official. |
+| Origin | Official, unless someone outside marketing built it and marketing hasn't reviewed it (then Field-Created). |
 | Last Updated | Today's date (living document). |
 
 Skip SKILL.md Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map) for tools.
