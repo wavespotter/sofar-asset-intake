@@ -11,7 +11,9 @@ this asset." The skill will:
 
 1. **Catalogue it in the Resource Library** (directly) — Title, Summary, Product, Content
    Type, Smart Mooring Sensor(s), Use Case Category, Link, Last Updated, and the AI
-   detailed-description field.
+   detailed-description field. It also sets **Origin**: Official for anything marketing
+   made or approved, or Field-Created (with the Customer / Prospect, when there is one) for
+   any deck, one-pager or other asset a rep or the field team made on their own.
 2. **Capture customer testimonials** — if the asset contains genuine customer quotes, it
    drafts a row per quote and **shows them to you for approval** before adding them to the
    Customer Testimonials Repository.
