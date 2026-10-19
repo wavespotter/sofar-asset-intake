@@ -3,8 +3,8 @@ name: intake-asset
 description: >
   This skill should be used when someone shares a marketing asset — a URL, pasted text,
   or an uploaded file (case study, blog, webinar, one-pager, press release, customer
-  story, spec sheet, tool/demo, internal tool, podcast, slide deck, field-created deck or
-  one-pager or other rep-made asset, savings report, etc.) — and wants it filed into Sofar Ocean's Notion databases.
+  story, spec sheet, tool/demo, internal tool, podcast, slide deck, custom deck or
+  one-pager made for one customer or meeting, rep-made asset, savings report, etc.) — and wants it filed into Sofar Ocean's Notion databases.
   Trigger on phrases like "add this to the resource library", "catalogue this asset",
   "log this resource", "intake this asset", "add to Notion", "add this case study",
   "capture this testimonial/quote", or "add this stat". The skill catalogues the asset in
@@ -12,7 +12,7 @@ description: >
   Repository (after confirmation), and surfaces genuinely new featureable statistics into
   the Statistics Repository (conservatively, after confirmation, always under review).
 metadata:
-  version: "0.8.0"
+  version: "0.9.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -83,7 +83,7 @@ If it's not a duplicate, then following `references/resource-library-schema.md`,
 Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Third-Party?
 (Yes when the asset is published outside Sofar Ocean's own properties — third-party media,
 external blogs, research journals — else No), Source (the publication/outlet/journal name
-when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (field-created assets
+when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (Custom assets
 made for a specific account), Link, Last Updated (today, via bash `date +%F`),
 and the Detailed description (for AI parsing). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
@@ -91,26 +91,31 @@ the entry with the create-pages tool, parent = the Resource Library `data_source
 Before filling the fields, settle two classifications (full rules in
 `references/resource-library-schema.md`):
 
-**Origin: Official or Field-Created.** Origin is about who made the asset, not what kind of
-asset it is. Official is the default: use it for anything marketing made or approved. Set
-Origin = "Field-Created" when a rep, the field team, or anyone outside marketing made the
-asset and marketing hasn't reviewed it. It can be any kind of asset: a deck, a one-pager, a
-proposal, a custom savings report, a demo video, a spreadsheet, and so on. Signs include a
-company name in the title or file name, "for [Company]", "my deck" or "a one-pager I made",
-or the user saying a rep or someone on the field team made it. For a field-created asset:
+**Origin: Official or Custom.** Origin is about what the asset is for, not what format it is.
+Official is the default: reusable assets marketing made or approved for general use. Set
+Origin = "Custom" when either is true:
+- It is a one-off made for a specific customer, prospect, meeting or deal, **whoever made
+  it, marketing included** (e.g. a deck prepared for one prospect meeting).
+- A rep, the field team, or anyone outside marketing made it and marketing hasn't reviewed
+  it, even if it's meant for reuse.
+
+It can be any format: a deck, a one-pager, a proposal, a custom savings report, a demo
+video, a spreadsheet, and so on. Signs include a company name in the title or file name,
+"for [Company]" or "prepared for [Company]", a named meeting, "my deck" or "a one-pager I
+made", or the user saying a rep made it. For a Custom asset:
 - Fill **Customer / Prospect** with the account name whenever it was made for a specific
   customer or prospect. Leave it blank only when it's a general asset the rep made for
-  reuse (e.g. their own version of a pitch deck).
+  reuse (e.g. a rep's own version of a pitch deck).
 - Set **Content Type** to the kind of asset it is, exactly as for an Official one
   (Presentation for a deck, Sales Collateral for a one-pager or spec sheet, Webinar / Video
-  for a recording, and so on). Never invent a "Custom" or "Field" type.
+  for a recording, and so on). Origin never changes the Content Type; there is no "Custom" Content Type.
 - Always put the asset's shareable URL (e.g. the Google Slides, Docs or Drive link) in
   **Link**, not only in Drive Link. The library opens Link when someone clicks the card;
   Drive Link only powers the Download button.
 - Leave **Publicly Shareable?** empty unless the user explicitly says the asset can go to
-  customers. The library treats field-created assets as internal-only unless it's Yes.
-- Skip Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map). The content hasn't been
-  reviewed by marketing.
+  customers. The library treats Custom assets as internal-only unless it's Yes.
+- Skip Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map). The content is one-off or
+  hasn't been reviewed by marketing.
 
 Use judgment from the signs above. Ask the user only when the asset could plausibly be
 either and nothing points one way, or when it's clearly for one account but you can't tell
@@ -131,7 +136,7 @@ see. For a Tool:
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
 
-Skip this step for field-created assets and for Tools.
+Skip this step for Custom assets and for Tools.
 
 Per `references/testimonials-repository-schema.md`, decide whether the asset contains
 **genuine, attributable customer quotes**. If yes, draft a row per quote (Customer, Name,
@@ -144,7 +149,7 @@ duplicates) for the user's approval**, and only then create the approved, non-du
 
 ## Step 5 — Statistics (conditional, conservative, confirm first)
 
-Skip this step for field-created assets and for Tools.
+Skip this step for Custom assets and for Tools.
 
 Per `references/statistics-repository-schema.md`, decide whether the asset introduces a
 **genuinely new, featureable, quantified company/product statistic** (e.g. a cumulative
@@ -167,7 +172,7 @@ If one exists:
 
 Only when the Resource Library classification was **Product = Spotter** and **Content Type =
 "Customer Story"**. Otherwise skip this step entirely (it never runs for Tools or
-field-created assets).
+Custom assets).
 
 Run it for **every** Spotter customer story so the Coverage Map always reflects the case
 study, whether or not it is already listed. Per `references/coverage-map-schema.md`:
@@ -193,9 +198,9 @@ Give the user links to everything created: the Resource Library entry, any testi
 rows, any statistic candidate (noting it's under review), and any Case Study Coverage Map
 row (or a note that the case study was already mapped). Add a one-line note on how each was
 classified so the user can correct anything. For the Resource Library entry, always say how
-Origin was set (Official, or Field-Created and for which Customer / Prospect, and why), and,
+Origin was set (Official, or Custom and for which Customer / Prospect, and why), and,
 for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
-(customer-facing) and why. If later steps were skipped because the asset is field-created or
+(customer-facing) and why. If later steps were skipped because the asset is Custom or
 a Tool, say so.
 
 ## Notes
