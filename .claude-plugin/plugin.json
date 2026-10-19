@@ -1,6 +1,6 @@
 {
   "name": "sofar-asset-intake",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Drop in a marketing asset (URL, pasted text, or file) and file it into the right Sofar Notion databases: catalogue it in the Resource Library, extract customer quotes into the Customer Testimonials Repository, surface any new featureable statistics into the Statistics Repository, and, for Spotter customer stories, add them to the Case Study Coverage Map if not already mapped, with duplicate detection before every write, plus the appropriate confirmation and governance.",
   "author": {
     "name": "Sofar Ocean Marketing"
