@@ -23,7 +23,7 @@ the intended set, but the live schema wins if they differ.
 | Link | url | Canonical URL. For a Custom asset, its shareable Slides/Docs/Drive URL; for a Tool, its web address (required). |
 | Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
-| Tutorial Video | url | Optional. A training, demo or tutorial video for the asset (e.g. a Loom link). Fill it whenever the user gives one; for a Tool, ask for one (see "Internal tools"). Never invent or search for one. |
+| Tutorial Videos | rich_text | Optional. Training, demo or tutorial videos for the asset (e.g. Loom links). One video: just the link. Several: one per line as `Title: link`. Fill it whenever the user gives any; for a Tool, ask (see "Internal tools"). Never invent or search for one. The old `Tutorial Video` (url) property is retired: never write to it. |
 
 Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
@@ -123,7 +123,7 @@ When Origin = Custom:
 | Third-Party? | No. |
 | Origin | Official, unless someone outside marketing built it and marketing hasn't reviewed it (then Custom). |
 | Last Updated | Today's date (living document). |
-| Tutorial Video | Optional. The URL of a training, demo or tutorial video (Loom, YouTube, Vimeo or any other link). The tool's tile shows a "Watch tutorial" link when it's set: Loom, YouTube and Vimeo links play in a pop-up on the page, and other links open in a new tab. If the user didn't include one, ask once whether there is a tutorial video; if not, leave it blank. |
+| Tutorial Videos | Optional. Training, demo or tutorial videos (Loom, YouTube, Vimeo or any other link). One video: just the link. A series: one per line as `Title: link`, in viewing order, using the titles the user or source gives (e.g. `Pt 2: How to Share: https://...`). The tile shows "Watch tutorial" for one video and a "Tutorials (N)" menu for several; Loom, YouTube and Vimeo play in a pop-up and other links open in a new tab. If the user didn't include any, ask once whether there are tutorial videos; if not, leave it blank. |
 | Page icon | Optional. Set the Notion page icon to one fitting emoji (e.g. 🧮 for a cost calculator, ✍️ for a signature generator); the tile shows it. Skip it if nothing fits. |
 
 Skip SKILL.md Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map) for tools.
