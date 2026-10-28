@@ -12,7 +12,7 @@ description: >
   Repository (after confirmation), and surfaces genuinely new featureable statistics into
   the Statistics Repository (conservatively, after confirmation, always under review).
 metadata:
-  version: "0.9.0"
+  version: "0.10.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -85,7 +85,8 @@ Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Thir
 external blogs, research journals — else No), Source (the publication/outlet/journal name
 when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (Custom assets
 made for a specific account), Link, Last Updated (today, via bash `date +%F`),
-and the Detailed description (for AI parsing). Create
+the Detailed description (for AI parsing), and Tutorial Video (only when a video link is
+given; see the Tool rules below). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
 
 Before filling the fields, settle two classifications (full rules in
@@ -132,6 +133,12 @@ see. For a Tool:
   the description shown on the tool's tile.
 - Product, Smart Mooring Sensor(s), Use Case Category and Stage in Buyer's Journey are
   optional. Third-Party? = No.
+- **Tutorial Video** is optional: put the URL of a training, demo or tutorial video (e.g. a
+  Loom) here; the tile shows a "Watch tutorial" link. If the user didn't include one, ask
+  once whether there is one. Never invent or search for a video.
+- Optionally set the page icon to one fitting emoji; the tile shows it.
+- If the tool also has a public, customer-facing version, file that as a separate
+  Interactive Tool / Demo entry with its own Link rather than combining them.
 - Skip Steps 4, 5 and 6.
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
