@@ -32,12 +32,16 @@ this asset." The skill will:
    already listed, adds it under the right year and publication in the page's existing
    format. It never edits existing entries. Research entries also get a **Sofar Reference**
    tag (Central, Passing or None) saying how much the paper references Sofar's products.
+6. **Save research PDFs to Drive.** When a research paper comes as a PDF, or exists only as
+   a PDF, it saves the file to Sofar Marketing / Resource Library / Research papers in
+   Google Drive (through your synced Drive folder when it can reach your computer, or with
+   step-by-step upload instructions when it can't) and links it from the library entry.
 
 ## Components
 
 | Component | Purpose |
 |---|---|
-| Skill: `intake-asset` | End-to-end intake workflow plus reference files for the Resource Library, Testimonials, Statistics, the Case Study Coverage Map, and the Academic publications page. |
+| Skill: `intake-asset` | End-to-end intake workflow plus reference files for the Resource Library, Testimonials, Statistics, the Case Study Coverage Map, the Academic publications page, and research PDFs in Drive. |
 
 No bundled MCP server — the skill uses your connected **Notion** connector.
 
@@ -51,6 +55,10 @@ No bundled MCP server — the skill uses your connected **Notion** connector.
   - 📈 Sofar Ocean Statistics Repository
   - 🗺️ Case Study Coverage Map (in the Spotter Case Study Program page; Spotter customer stories only)
   - 📚 Academic publications featuring Sofar / Spotter (a page in Marketing Team; third-party research only)
+- For research PDFs: the **Google Drive** connector, and ideally Google Drive for desktop
+  signed in with your Sofar account so the Sofar Marketing shared drive syncs to your
+  computer. Without it, the skill gives you the folder link and upload steps instead:
+  https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2
 
 ## Usage
 
@@ -64,6 +72,7 @@ Confidence levels by destination:
 - **Statistics** — conservative, confirmed first, always created **under review** (never approved).
 - **Case Study Coverage Map** — Spotter customer stories only; dedupe-checked, then confirmed before adding.
 - **Academic publications page:** third-party research only; dedupe-checked, then added directly if not already listed.
+- **Research PDFs:** saved to the Research papers folder only when you provide a PDF or the paper has no public link.
 
 **Duplicate prevention (all three).** Before any write, the skill checks for an existing
 match and **warns and asks** (update / add anyway / skip) rather than silently duplicating.
