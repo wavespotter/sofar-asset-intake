@@ -9,7 +9,7 @@
     {
       "name": "sofar-asset-intake",
       "source": "./",
-      "description": "Drop in a marketing asset and file it into the right Sofar Notion databases: Resource Library, Customer Testimonials, Statistics, the Case Study Coverage Map, and the Academic publications page.",
+      "description": "Drop in a marketing asset and file it into the right Sofar Notion databases: Resource Library, Customer Testimonials, Statistics, the Case Study Coverage Map, the Academic publications page, and research PDFs in Google Drive.",
       "category": "marketing",
       "keywords": ["notion", "marketing", "intake", "resource-library", "testimonials", "statistics", "case-study"]
     }
