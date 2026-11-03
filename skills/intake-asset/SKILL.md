@@ -14,7 +14,7 @@ description: >
   adds third-party research papers to the Academic publications page when they are not
   already listed.
 metadata:
-  version: "0.12.0"
+  version: "0.12.1"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -106,7 +106,8 @@ part of the study (Spotter validations, studies using Spotter, Smart Mooring, Wa
 Sofar data, and Sofar's own papers about them). Passing: Sofar is cited or mentioned but
 isn't what the paper is about. None: no reference to Sofar's products, for example a
 staff-authored paper where Sofar appears only in the author affiliation. Judge it from the
-paper itself (methods, data and acknowledgments), not from who wrote it. If you can't
+paper itself (methods, data and acknowledgments), not from who wrote it. A paper whose
+only Sofar link is a discontinued product, such as the Trident ROV, is Passing. If you can't
 tell, for example the full text is paywalled and the abstract doesn't say, ask the user
 rather than guessing.
 
