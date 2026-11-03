@@ -24,8 +24,10 @@ and Sofar's own white papers (Third-Party? = No), datasets, talks and slides, ar
 and anything Custom. A paper written by Sofar staff but published in a journal is
 Third-Party? = Yes, so it is in scope.
 
-The page step needs a link. If the asset is only an uploaded file with no public link,
-skip the page and say so in the report.
+The page step needs a link. When the paper has no public link, use its Drive link from
+Step 3a (the page is internal, and the entry format is the same `[Title](URL)`). Never
+attach the PDF to the page. If there is no link of either kind yet (for example the manual
+upload is still pending), skip the page and say so in the report.
 
 ## Step order
 
