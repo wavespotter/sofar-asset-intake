@@ -26,12 +26,18 @@ this asset." The skill will:
    with you** (especially Depth and Geography) before adding it. If it is already mapped, it
    looks for empty or improvable fields and **proposes filling those in** (never overwriting
    a human-set value without asking).
+5. **List third-party research on the Academic publications page.** For research papers
+   published outside Sofar (Content Type Whitepaper / Research, Third-Party? = Yes), it
+   checks the "Academic publications featuring Sofar / Spotter" page and, if the paper isn't
+   already listed, adds it under the right year and publication in the page's existing
+   format. It never edits existing entries. Research entries also get a **Sofar Reference**
+   tag (Central, Passing or None) saying how much the paper references Sofar's products.
 
 ## Components
 
 | Component | Purpose |
 |---|---|
-| Skill: `intake-asset` | End-to-end intake workflow plus four reference schemas (Resource Library, Testimonials, Statistics, Case Study Coverage Map). |
+| Skill: `intake-asset` | End-to-end intake workflow plus reference files for the Resource Library, Testimonials, Statistics, the Case Study Coverage Map, and the Academic publications page. |
 
 No bundled MCP server — the skill uses your connected **Notion** connector.
 
@@ -44,6 +50,7 @@ No bundled MCP server — the skill uses your connected **Notion** connector.
   - ⭐ Customer Testimonials Repository
   - 📈 Sofar Ocean Statistics Repository
   - 🗺️ Case Study Coverage Map (in the Spotter Case Study Program page; Spotter customer stories only)
+  - 📚 Academic publications featuring Sofar / Spotter (a page in Marketing Team; third-party research only)
 
 ## Usage
 
@@ -56,6 +63,7 @@ Confidence levels by destination:
 - **Testimonials** — always shown for your approval first; "Do Not Use" never auto-applied.
 - **Statistics** — conservative, confirmed first, always created **under review** (never approved).
 - **Case Study Coverage Map** — Spotter customer stories only; dedupe-checked, then confirmed before adding.
+- **Academic publications page:** third-party research only; dedupe-checked, then added directly if not already listed.
 
 **Duplicate prevention (all three).** Before any write, the skill checks for an existing
 match and **warns and asks** (update / add anyway / skip) rather than silently duplicating.
