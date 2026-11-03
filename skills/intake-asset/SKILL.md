@@ -9,10 +9,10 @@ description: >
   "log this resource", "intake this asset", "add to Notion", "add this case study",
   "capture this testimonial/quote", or "add this stat". The skill catalogues the asset in
   the Resource Library, extracts customer quotes into the Customer Testimonials
-  Repository (after confirmation), surfaces genuinely new featureable statistics into
-  the Statistics Repository (conservatively, after confirmation, always under review),
-  adds third-party research papers to the Academic publications page when they are not
-  already listed, and saves research PDFs to the Research papers folder in Google Drive.
+  Repository (after confirmation), surfaces new featureable statistics into the
+  Statistics Repository (conservatively, after confirmation, always under review), adds
+  third-party research papers to the Academic publications page if not already listed,
+  and saves research PDFs to Drive.
 metadata:
   version: "0.13.0"
   author: "Sofar Ocean Marketing"
