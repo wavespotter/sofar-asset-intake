@@ -20,6 +20,7 @@ the intended set, but the live schema wins if they differ.
 | Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
 | Origin | select | "Official" (default) or "Custom"; see "Origin and Customer / Prospect". |
 | Customer / Prospect | rich_text | Account name. Only for Custom assets made for a specific customer or prospect. |
+| Sofar Reference | select | Whitepaper / Research only: Central, Passing or None. See "Sofar Reference". Leave blank for every other Content Type. |
 | Link | url | Canonical URL. For a Custom asset, its shareable Slides/Docs/Drive URL; for a Tool, its web address (required). |
 | Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
@@ -189,6 +190,32 @@ it is about:
 
 Write format: both are plain strings, e.g. `"Third-Party?": "Yes"`,
 `"Source": "ECO Magazine"`.
+
+## Sofar Reference (select), Whitepaper / Research only
+
+Options: **Central**, **Passing**, **None**. Set it on every Whitepaper / Research entry,
+including Sofar's own papers and white papers. Leave it blank for every other Content
+Type. It works the same for every product (Product says which one), so it records only how
+much the paper references Sofar.
+
+- **Central:** Sofar's products, data or forecasts are a real part of the study:
+  Spotter or Smart Mooring validations and comparisons, studies that use Spotter, Smart
+  Mooring, Bristlemouth, Wayfinder or Sofar data, and Sofar-authored papers about them.
+- **Passing:** Sofar is cited or mentioned, but it isn't what the paper is about (for
+  example a single sentence naming Spotter in a literature review, or a citation of a Sofar
+  blog post).
+- **None:** no reference to Sofar's products or data. Typically a paper by Sofar staff
+  that is kept for credibility, where Sofar appears only in the author affiliation.
+
+Rules:
+- Judge it from the paper itself (methods, data, figures and acknowledgments), not from
+  who wrote it. A Sofar author doesn't make a paper Central.
+- Only Central is evidence about our products. Passing and None should never be presented
+  to a customer as product proof.
+- If you can't tell (the full text is paywalled or can't be fetched and the abstract
+  doesn't say), ask the user rather than guessing.
+
+Write format: plain string, e.g. `"Sofar Reference": "Central"`.
 
 ## Last Updated rule
 
