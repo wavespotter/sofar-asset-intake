@@ -14,7 +14,7 @@ description: >
   third-party research papers to the Academic publications page if not already listed,
   and saves research PDFs to Drive.
 metadata:
-  version: "0.13.0"
+  version: "0.13.1"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -113,7 +113,9 @@ staff-authored paper where Sofar appears only in the author affiliation. Judge i
 paper itself (methods, data and acknowledgments), not from who wrote it. A paper whose
 only Sofar link is a discontinued product, such as the Trident ROV, is Passing. If you can't
 tell, for example the full text is paywalled and the abstract doesn't say, ask the user
-rather than guessing.
+rather than guessing. Also check the paper's limitations, discussion and conclusion for
+criticism of a Sofar product, and record any as a "Caveat for reps" line (see the schema
+reference).
 
 **Origin: Official or Custom.** Origin is about what the asset is for, not what format it is.
 Official is the default: reusable assets marketing made or approved for general use. Set
@@ -262,7 +264,7 @@ row (or a note that the case study was already mapped). Add a one-line note on h
 classified so the user can correct anything. For the Resource Library entry, always say how
 Origin was set (Official, or Custom and for which Customer / Prospect, and why), and,
 for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
-(customer-facing) and why. For research, say how Sofar Reference was set and why, where
+(customer-facing) and why. For research, say how Sofar Reference was set and why, any caveat for reps, where
 the PDF was saved (or that the upload is pending) when there was one, and
 give the Academic publications page result (added, with the year and heading, already
 listed, or skipped and why). If later steps were skipped because the asset is Custom or
