@@ -9,10 +9,12 @@ description: >
   "log this resource", "intake this asset", "add to Notion", "add this case study",
   "capture this testimonial/quote", or "add this stat". The skill catalogues the asset in
   the Resource Library, extracts customer quotes into the Customer Testimonials
-  Repository (after confirmation), and surfaces genuinely new featureable statistics into
-  the Statistics Repository (conservatively, after confirmation, always under review).
+  Repository (after confirmation), surfaces genuinely new featureable statistics into
+  the Statistics Repository (conservatively, after confirmation, always under review), and
+  adds third-party research papers to the Academic publications page when they are not
+  already listed.
 metadata:
-  version: "0.11.0"
+  version: "0.12.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -29,6 +31,9 @@ Take one marketing asset and file it into the right Sofar Notion databases:
 4. **Case Study Coverage Map** (conditional): only for Spotter customer stories. If the case
    study is not already mapped, draft a row, **confirm with the user** (especially Depth and
    Geography), then add it. Dedupe first; most published case studies are already there.
+5. **Academic publications page** (conditional): only for third-party research (Content
+   Type "Whitepaper / Research" with Third-Party? = Yes). If the paper is not already on
+   the page, add it in the page's existing format. (Automatic, no confirmation.)
 
 **Prevent duplicates.** Before creating anything in any database, check whether it already
 exists and **warn and ask** on a likely match (update / add anyway / skip) — never silently
@@ -44,6 +49,7 @@ classifying:
 - `references/testimonials-repository-schema.md`
 - `references/statistics-repository-schema.md`
 - `references/coverage-map-schema.md` — Case Study Coverage Map (Spotter customer stories only).
+- `references/academic-publications-page.md`: Academic publications page (third-party research only).
 
 ## Step 1 — Load the Notion tools
 
@@ -85,12 +91,24 @@ Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Thir
 external blogs, research journals — else No), Source (the publication/outlet/journal name
 when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (Custom assets
 made for a specific account), Link, Last Updated (today, via bash `date +%F`),
-the Detailed description (for AI parsing), and Tutorial Videos (only when video links are
-given; see the Tool rules below). Create
+the Detailed description (for AI parsing), Tutorial Videos (only when video links are
+given; see the Tool rules below), and, for Whitepaper / Research only, Sofar Reference
+(see below). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
 
-Before filling the fields, settle two classifications (full rules in
+Before filling the fields, settle these classifications (full rules in
 `references/resource-library-schema.md`):
+
+**Sofar Reference (Whitepaper / Research only): Central, Passing or None.** It records how
+much the paper references Sofar's products or data, so reps never send a paper as product
+proof when it doesn't reference us. Central: Sofar products, data or forecasts are a real
+part of the study (Spotter validations, studies using Spotter, Smart Mooring, Wayfinder or
+Sofar data, and Sofar's own papers about them). Passing: Sofar is cited or mentioned but
+isn't what the paper is about. None: no reference to Sofar's products, for example a
+staff-authored paper where Sofar appears only in the author affiliation. Judge it from the
+paper itself (methods, data and acknowledgments), not from who wrote it. If you can't
+tell, for example the full text is paywalled and the abstract doesn't say, ask the user
+rather than guessing.
 
 **Origin: Official or Custom.** Origin is about what the asset is for, not what format it is.
 Official is the default: reusable assets marketing made or approved for general use. Set
@@ -142,6 +160,23 @@ see. For a Tool:
 - If the tool also has a public, customer-facing version, file that as a separate
   Interactive Tool / Demo entry with its own Link rather than combining them.
 - Skip Steps 4, 5 and 6.
+
+## Step 3b: Academic publications page (conditional, dedupe-first, automatic)
+
+Only when the asset is third-party research: Content Type "Whitepaper / Research" with
+Third-Party? = Yes. Otherwise skip this step. Run it whether the Resource Library entry was
+just created, updated, or skipped as a duplicate (then use the existing entry's
+classification), because a paper can be in the library and still be missing from the page.
+
+Follow `references/academic-publications-page.md`:
+1. Fetch the page (`https://app.notion.com/p/af13290265a04c7095f9934ad5eb4dbc`) and read
+   all of it.
+2. **Dedupe** by normalized URL or DOI, fuzzy title, and attachment file names. If the
+   paper is already listed, write nothing and just say so in the report. Don't ask.
+3. Otherwise add it automatically, under its publication year and its publication heading,
+   in exactly the format the neighboring entries use. Never add a format, section or
+   label the page doesn't already have.
+4. Fetch the page again to confirm it landed in the right place, once.
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
 
@@ -209,7 +244,9 @@ row (or a note that the case study was already mapped). Add a one-line note on h
 classified so the user can correct anything. For the Resource Library entry, always say how
 Origin was set (Official, or Custom and for which Customer / Prospect, and why), and,
 for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
-(customer-facing) and why. If later steps were skipped because the asset is Custom or
+(customer-facing) and why. For research, say how Sofar Reference was set and why, and
+give the Academic publications page result (added, with the year and heading, already
+listed, or skipped and why). If later steps were skipped because the asset is Custom or
 a Tool, say so.
 
 ## Notes
@@ -221,4 +258,6 @@ a Tool, say so.
 - Order of confidence: Resource Library is direct; Testimonials, Statistics, and the Case
   Study Coverage Map are always confirm-first; Statistics is additionally conservative,
   dedupe-aware, and never approved. The Coverage Map step runs only for Spotter customer
-  stories, and most published case studies are already mapped.
+  stories, and most published case studies are already mapped. The Academic publications
+  page step is direct (no confirmation) but adds only papers that aren't already listed,
+  and never edits existing entries.
