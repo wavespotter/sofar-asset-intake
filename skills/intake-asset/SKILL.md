@@ -10,11 +10,11 @@ description: >
   "capture this testimonial/quote", or "add this stat". The skill catalogues the asset in
   the Resource Library, extracts customer quotes into the Customer Testimonials
   Repository (after confirmation), surfaces genuinely new featureable statistics into
-  the Statistics Repository (conservatively, after confirmation, always under review), and
+  the Statistics Repository (conservatively, after confirmation, always under review),
   adds third-party research papers to the Academic publications page when they are not
-  already listed.
+  already listed, and saves research PDFs to the Research papers folder in Google Drive.
 metadata:
-  version: "0.12.1"
+  version: "0.13.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -50,6 +50,7 @@ classifying:
 - `references/statistics-repository-schema.md`
 - `references/coverage-map-schema.md` — Case Study Coverage Map (Spotter customer stories only).
 - `references/academic-publications-page.md`: Academic publications page (third-party research only).
+- `references/research-pdfs.md`: saving research PDFs to Drive (Whitepaper / Research only).
 
 ## Step 1 — Load the Notion tools
 
@@ -70,6 +71,9 @@ be connected first (Settings → Connectors).
   shell, escalate to the Claude in Chrome tools to get the real text.
 - **Pasted text**: use it directly. Ask for the canonical Link if none is given.
 - **Uploaded file**: read it from the uploads folder.
+
+For a research paper provided as a PDF, or one that exists only as a PDF, also save the
+PDF to Drive in Step 3a.
 
 Capture the asset's real title, body, author, publication date, and source URL.
 
@@ -162,6 +166,19 @@ see. For a Tool:
   Interactive Tool / Demo entry with its own Link rather than combining them.
 - Skip Steps 4, 5 and 6.
 
+## Step 3a: Research PDF to Drive (conditional)
+
+Only for Content Type "Whitepaper / Research", and only when the user provided a PDF or the
+paper exists only as a PDF. Never go looking for a PDF when the paper has a public link.
+Follow `references/research-pdfs.md`:
+1. Name it `<year> - <title>.pdf` and check the Research papers folder for an existing copy.
+2. Save it to the folder through the user's synced Google Drive folder when the session has
+   a shell on their computer (Path A). Otherwise give the user the manual upload steps and
+   the folder link (Path B), word for word, and file the entry without waiting.
+3. Set **Drive Link** to the Drive file's link. If the paper has no public link, put the
+   Drive link in **Link** too. Set **Publicly Shareable?** = "No" when the paper is
+   paywalled.
+
 ## Step 3b: Academic publications page (conditional, dedupe-first, automatic)
 
 Only when the asset is third-party research: Content Type "Whitepaper / Research" with
@@ -245,7 +262,8 @@ row (or a note that the case study was already mapped). Add a one-line note on h
 classified so the user can correct anything. For the Resource Library entry, always say how
 Origin was set (Official, or Custom and for which Customer / Prospect, and why), and,
 for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
-(customer-facing) and why. For research, say how Sofar Reference was set and why, and
+(customer-facing) and why. For research, say how Sofar Reference was set and why, where
+the PDF was saved (or that the upload is pending) when there was one, and
 give the Academic publications page result (added, with the year and heading, already
 listed, or skipped and why). If later steps were skipped because the asset is Custom or
 a Tool, say so.
@@ -261,4 +279,5 @@ a Tool, say so.
   dedupe-aware, and never approved. The Coverage Map step runs only for Spotter customer
   stories, and most published case studies are already mapped. The Academic publications
   page step is direct (no confirmation) but adds only papers that aren't already listed,
-  and never edits existing entries.
+  and never edits existing entries. Research PDFs go only to the Research papers folder,
+  never as Notion attachments.
