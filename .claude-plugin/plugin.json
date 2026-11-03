@@ -1,7 +1,7 @@
 {
   "name": "sofar-asset-intake",
-  "version": "0.13.1",
-  "description": "Drop in a marketing asset (URL, pasted text, or file) and file it into the right Sofar Notion databases: catalogue it in the Resource Library, extract customer quotes into the Customer Testimonials Repository, surface any new featureable statistics into the Statistics Repository, and, for Spotter customer stories, add them to the Case Study Coverage Map if not already mapped, and, for third-party research papers, add them to the Academic publications page if not already listed and save any PDF to the Research papers folder in Google Drive, with duplicate detection before every write, plus the appropriate confirmation and governance.",
+  "version": "0.14.0",
+  "description": "File and find Sofar marketing assets. Intake: drop in an asset (URL, pasted text, or file) and file it into the right Sofar Notion databases: the Resource Library, Customer Testimonials, Statistics, the Case Study Coverage Map for Spotter customer stories, and the Academic publications page and Drive for third-party research, with duplicate detection and the right confirmation and governance. Find: answer \"do we have anything on X?\" by searching the Resource Library first, then the governed repositories, wider Notion and Drive, and the web, labeling every result for whether it can go to customers.",
   "author": {
     "name": "Sofar Ocean Marketing"
   },
@@ -13,6 +13,9 @@
     "statistics",
     "content",
     "intake",
-    "research"
+    "research",
+    "search",
+    "find",
+    "retrieval"
   ]
 }
