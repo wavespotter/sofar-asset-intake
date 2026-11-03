@@ -50,6 +50,21 @@ quote match unless the user wants it re-added).
 Already conservative. Match on `Statistic` title tokens and/or `Externally Shareable
 Description`. On a match, do not create — offer to update the existing row instead.
 
+## Academic publications page dedupe (Step 3b)
+
+The page is a regular Notion page, not a database, so there is nothing to query. Fetch the
+whole page and compare against its content:
+- Normalized URL match against every link on the page, plus DOI match: the DOI string
+  (`10.xxxx/...`, case-insensitive) is the same paper whether it sits in a `doi.org` link
+  or a publisher URL.
+- Fuzzy title match against link text and plain-text titles.
+- Attachment file names (`name=...pdf` in file blocks), with underscores read as spaces.
+  Many older entries are PDFs with no link or title text.
+- A preprint and its published version are the same paper.
+
+Unlike the databases, a match here is not warn-and-ask: write nothing and report that the
+paper is already listed. Never edit or replace the existing entry.
+
 ## Matching technique
 
 SQL has no fuzzy operator here, so:
