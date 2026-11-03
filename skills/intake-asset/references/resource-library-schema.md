@@ -210,6 +210,8 @@ much the paper references Sofar.
 Rules:
 - Judge it from the paper itself (methods, data, figures and acknowledgments), not from
   who wrote it. A Sofar author doesn't make a paper Central.
+- Only products Sofar sells today count toward Central. A paper whose only Sofar link is a
+  discontinued product (for example the Trident ROV or other OpenROV products) is Passing.
 - Only Central is evidence about our products. Passing and None should never be presented
   to a customer as product proof.
 - If you can't tell (the full text is paywalled or can't be fetched and the abstract
