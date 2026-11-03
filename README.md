@@ -37,11 +37,31 @@ this asset." The skill will:
    Google Drive (through your synced Drive folder when it can reach your computer, or with
    step-by-step upload instructions when it can't) and links it from the library entry.
 
+## Finding assets (find-resource)
+
+Ask Claude something like "do we have any papers on Spotter's barometer accuracy?",
+"is there a case study for ports in Europe?" or "what can I send a customer about Smart
+Mooring?" The `find-resource` skill:
+
+1. Searches the **Resource Library first**, then the Statistics, Testimonials and Case
+   Study Coverage Map databases, then wider Notion and Drive, then the web.
+2. Checks each result against the actual question (right product, sensor, metric) and
+   says so when it only partly fits.
+3. **Labels every result:** OK to share with customers, share the public link only,
+   partners only, internal only, or do not use. Research also shows the venue, whether
+   it is peer reviewed, its Sofar Reference, and any caveat for reps.
+4. Says plainly what was not found, and offers to file anything useful that isn't in the
+   library yet (through intake, only if you say yes).
+
+It is read-only: it never changes Notion or Drive. Results depend on your own Notion and
+Drive access.
+
 ## Components
 
 | Component | Purpose |
 |---|---|
 | Skill: `intake-asset` | End-to-end intake workflow plus reference files for the Resource Library, Testimonials, Statistics, the Case Study Coverage Map, the Academic publications page, and research PDFs in Drive. |
+| Skill: `find-resource` | Read-only search across the Resource Library, governed repositories, wider Notion and Drive, and the web, with a sharing label on every result. Reference: `sources-and-labels.md`. |
 
 No bundled MCP server — the skill uses your connected **Notion** connector.
 
