@@ -219,6 +219,16 @@ Rules:
 - If you can't tell (the full text is paywalled or can't be fetched and the abstract
   doesn't say), ask the user rather than guessing.
 
+**Caveat for reps.** Whenever the paper mentions a Sofar product, also read its
+limitations, discussion and conclusion for criticism of that product: data or processing
+problems, poor performance in some conditions, or a recommendation to use other
+instruments. If there is any, add a line to the Detailed description starting
+`- Caveat for reps:` that paraphrases it closely, gives the page (the printed page number
+when there is one), and says what not to claim from this paper. Mention it in the report.
+Sofar Reference stays as judged above: a Central paper with a caveat is still Central. A
+note on the Academic publications page (for example "negative product feedback on page
+56") is a strong hint to look.
+
 Write format: plain string, e.g. `"Sofar Reference": "Central"`.
 
 ## Last Updated rule
