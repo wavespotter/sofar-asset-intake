@@ -1,6 +1,6 @@
 {
   "name": "sofar-asset-intake",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "File and find Sofar marketing assets. Intake: drop in an asset (URL, pasted text, or file) and file it into the right Sofar Notion databases: the Resource Library, Customer Testimonials, Statistics, the Case Study Coverage Map for Spotter customer stories, and the Academic publications page and Drive for third-party research, with duplicate detection and the right confirmation and governance. Find: answer \"do we have anything on X?\" by searching the Resource Library first, then the governed repositories, wider Notion and Drive, and the web, labeling every result for whether it can go to customers.",
   "author": {
     "name": "Sofar Ocean Marketing"
