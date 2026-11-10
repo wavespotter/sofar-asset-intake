@@ -14,7 +14,7 @@ description: >
   third-party research papers to the Academic publications page if not already listed,
   and saves research PDFs to Drive.
 metadata:
-  version: "0.13.1"
+  version: "0.14.1"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -195,7 +195,9 @@ Follow `references/academic-publications-page.md`:
    paper is already listed, write nothing and just say so in the report. Don't ask.
 3. Otherwise add it automatically, under its publication year and its publication heading,
    in exactly the format the neighboring entries use. Never add a format, section or
-   label the page doesn't already have.
+   label the page doesn't already have. A preprint that names its target journal (e.g.
+   "manuscript in preparation for JGR: Oceans") goes under that journal's heading, tagged
+   `[not peer reviewed]`; a preprint that names none goes under `Preprint`.
 4. Fetch the page again to confirm it landed in the right place, once.
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
