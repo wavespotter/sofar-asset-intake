@@ -30,7 +30,8 @@ Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
 `Drive Link` — unless the user explicitly asks. These are managed by people/other flows.
 The one exception is a research PDF saved to the Research papers folder: then set Drive
-Link, and Publicly Shareable? = "No" if the paper is paywalled, per `research-pdfs.md`.
+Link (and Link, when the paper has no public link), per `research-pdfs.md`. A paywalled
+paper does not change Publicly Shareable?: customers often have their own access.
 Setting Drive Link never replaces Link: the library opens Link when someone clicks a card,
 and Drive Link only powers the Download button. For Custom assets in particular, leave
 `Publicly Shareable?` empty unless the user explicitly says the asset can go to customers.
