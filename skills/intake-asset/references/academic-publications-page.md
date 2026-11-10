@@ -66,16 +66,32 @@ upload is still pending), skip the page and say so in the report.
      page (for example "Geophysical Research Letters", "Journal of Atmospheric and Oceanic
      Technology", "Ocean Engineering"). Otherwise use the journal or venue's full name, the
      same value as the Resource Library Source property.
-   - Categories the page already uses: `Preprint` for preprints, the university name for
-     theses (for example `### Oregon State University`, with the Master’s thesis note
-     below, or `### Oregon State University (Doctoral Dissertation)` for a dissertation),
-     and `Project Report` for unreviewed project reports.
+   - **Preprints: file under the target journal when the paper names one.** Before
+     choosing a heading for a preprint (ESS Open Archive, arXiv, Research Square, SSRN, a
+     ResearchGate upload and similar), look for a journal the authors name as its
+     destination: the running header or first page ("manuscript in preparation for
+     JGR: Oceans", "submitted to Ocean Engineering", "under review at ..."), the preprint
+     server's landing page (a "submitted to" or journal field), or the paper's own front
+     matter. If it names one, file the entry under that journal's heading in the year,
+     using the page's name for it (for example "manuscript in preparation for JGR:
+     Oceans" goes under the existing `### JGR Oceans`, not a new "Journal of Geophysical
+     Research: Oceans" heading), and add `\[<i>not peer reviewed</i>\]` after the link.
+     Mention the target journal in the AI Summary ("in preparation for JGR: Oceans"), so
+     no one reads the entry as a published paper in that journal. Only use a journal the
+     paper itself names; never guess one from the topic or the authors' past papers. If
+     the paper names no journal, file it under `Preprint`, as before, with no tag.
+   - Other categories the page already uses: `Preprint` for preprints that name no
+     target journal, the university name for theses (for example
+     `### Oregon State University`, with the Master’s thesis note below, or
+     `### Oregon State University (Doctoral Dissertation)` for a dissertation), and
+     `Project Report` for unreviewed project reports.
 5. **Write the entry** in the page's existing format:
    - The title as a link on its own line: `[Title](URL)`. Use the asset's real title and
      the canonical link (the DOI link when there is one, otherwise the publisher page).
    - Optional bracketed notes on the same line, after a space, only in forms the page
      already uses: `\[<b>paywalled</b>\]`, `\[<i>not peer reviewed</i>\]`,
-     `\[Master’s thesis\]`. Add one only when it is true.
+     `\[Master’s thesis\]`. Add one only when it is true. A preprint filed under its
+     target journal always gets `\[<i>not peer reviewed</i>\]`.
    - **Toggle, only when the year's section already uses them.** Check the existing
      entries in the target year's section. The 2026 section puts a toggle under each entry
      and the older years don't. If the section's entries carry toggles, add one directly
