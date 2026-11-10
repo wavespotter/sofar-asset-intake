@@ -1,22 +1,22 @@
-# Research PDFs: Drive copy plus a Notion attachment (Whitepaper / Research only)
+# Research PDFs: one copy in Drive, linked from Notion (Whitepaper / Research only)
 
 **Folder:** Sofar Marketing shared drive / Resource Library / Research papers
 **Folder link:** https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2
 **Folder id:** `1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2` (shared drive id `1TLcetYMT79Gi2mNF05HOi8-6eWoqv9JqVOo`)
 
-When someone gives you a research paper as a PDF, it ends up in two places:
-1. **Drive (the master copy).** One file in the Research papers folder. The Resource
-   Library entry's **Drive Link** points to it, which powers the library's Download button.
-2. **Notion (an attached copy).** The same PDF attached in one place, so people can open
-   it without leaving Notion and Notion search and AI can read it:
-   - under the paper's entry on the Academic publications page, when the paper goes on
-     that page (third-party research), or
-   - at the top of the Resource Library entry's page body, when it doesn't (for example a
-     Sofar white paper).
-   One attachment per paper, so if it has to be done by hand it is a single step.
+When someone gives you a research paper as a PDF, it gets one home: a file in the
+Research papers folder. Notion links to it in two places, and nothing is attached in
+Notion:
+- **Resource Library entry:** **Drive Link** (powers the Download button), and **Link** too
+  when the paper has no public page.
+- **Academic publications page** (third-party research): the title links to the Drive file
+  when there is no public page; otherwise the title links to the public page and a
+  `[PDF]` link to the Drive file goes at the end of the line (see
+  `academic-publications-page.md`).
 
-The person filing should never have to know any of this. Do the steps, and only ask them
-to act when a step can't be done from the session, with exact, short instructions.
+The person filing should never need to know any of this. At most they do one small step
+(drag the PDF into a folder and click Done), and only when the file is too big to upload
+from the session.
 
 ## When this applies
 
@@ -26,7 +26,7 @@ Only for Content Type "Whitepaper / Research", and only when one of these is tru
 
 Don't go looking for a PDF when the paper has a public link, and don't download one from a
 publisher site. A link alone is a complete entry. If the user gives both a link and a PDF,
-do both steps below and keep the public link in Link.
+save the PDF and keep the public link in Link.
 
 Paywalled or gated papers are filed the same way. Don't set Publicly Shareable? because a
 paper is paywalled: customers often have their own access. Leave it to people, as for every
@@ -44,17 +44,17 @@ asset.
 - Before saving, search the folder (Google Drive connector, `parentId =
   '1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2'`, title contains a distinctive title word) for a file
   with the same name or title. If one is there, don't save a second copy. Use the existing
-  file's link and say so.
+  file's link.
 
-Use the same file name for the Notion attachment.
+You name the file. Never ask the user to rename anything.
 
-## Step 1: save to Drive
+## Saving to Drive
 
-Try these in order and use the first that works.
+Note the time (`date -u +%Y-%m-%dT%H:%M:%SZ`) before you start, for finding the file later.
+Check the size (`stat -c %s`), then use the first path that applies.
 
-**Path A: the Google Drive connector (PDFs up to about 3 MB).** Connector calls can carry
-files up to about 3.1 MB, so check the size first (`stat -c %s`). If the PDF is over
-3,000,000 bytes, skip straight to Path B or C without trying. Otherwise load the Drive
+**Path A: upload it for them (PDFs up to 3,000,000 bytes).** Connector calls can carry
+files up to about 3.1 MB, so never try this for a bigger file. Load the Google Drive
 connector's create-file tool (ToolSearch "google drive create file") and upload the PDF
 straight into the folder:
 - `title`: the file name above
@@ -63,129 +63,64 @@ straight into the folder:
 - `base64Content`: a file reference, not typed base64. Copy the PDF to a path with a plain
   name in the scratchpad, compute its SHA-256 (`sha256sum`), and pass
   `sha256:<64 lowercase hex>:<absolute path>`. The app fills in the content when the user
-  approves the call, so tell them in one line that they'll be asked to approve an upload
-  to the Research papers folder.
-Use the returned file's view link as Drive Link. If the call fails because the user can't
-write to the folder, say so plainly and go to Path C (they may need to be added to the
-Sofar Marketing shared drive).
+  approves the call. Say in one line, before the call, that they'll be asked to approve an
+  upload to the Research papers folder.
+Use the returned file's view link. If the call fails (no access, too big, any error), go to
+Path C. Don't retry and don't try other ways.
 
-**Path B: the synced folder.** Use this when Path A isn't possible (no Drive connector,
-or the PDF is over 3 MB) and the session has a shell on the user's computer with Google
-Drive for desktop. Otherwise go straight to Path C. If "Research papers" is already a connected folder, it is at
-`$HOME/mnt/Research papers` in the device shell. Otherwise it is usually at
-`~/Library/CloudStorage/GoogleDrive-<their work email>/Shared drives/Sofar Marketing/Resource Library/Research papers`
-on a Mac, or `G:\Shared drives\Sofar Marketing\Resource Library\Research papers` on
-Windows. Confirm it exists, request access to that exact folder once, then write the file
-with the device commit-files tool (or `cp -n` in the device shell, never plain `cp` or
-`mv`). Find it in Drive with the search above; a new file usually appears within a minute
-or two. If access is declined or the file never appears, go to Path C.
+**Path B: an already connected folder.** Only when the Research papers folder is already
+one of the session's connected folders on the user's computer (`$HOME/mnt/Research
+papers` in the device shell). Copy the PDF in with `cp -n` under the file name above,
+then find it in Drive with the search above (a new file usually appears within a minute or
+two). Don't request folder access for this; if it isn't connected already, use Path C.
 
-**Path C: the user uploads it.** Give these steps, word for word apart from the file name:
+**Path C: one guided step (everything else).** File everything else first, then end with
+the short report (SKILL.md Step 7), whose last line is the one step:
 
-> Please upload the PDF to our Research papers folder in Google Drive:
-> 1. Open https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2
-> 2. Click **New**, then **File upload**, and choose the PDF. (Or drag the file into the
->    folder window.)
-> 3. Rename it (right-click, **Rename**), select the whole name including ".pdf", and
->    paste: `<the file name>`
-> 4. Reply here when it's uploaded, or paste its link (right-click the file, then
->    **Share**, then **Copy link**).
->
-> If the link says you don't have access, ask the marketing team to add you to the Sofar
-> Marketing shared drive.
+> **One last step:** drag the PDF into [the Research papers folder](https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2), then click **Done**.
 
-Don't wait for the reply: finish every other step now and mark the Drive copy as pending
-(see "Never leave a paper half-filed"). When the user replies, find the file (Drive
-get-file-metadata on the pasted link's id, or the folder search), check it's in the
-Research papers folder, and fix the name with the Drive update-file tool if it differs
-(for example a doubled ".pdf.pdf"). Then fill in Drive Link (and Link, if the paper has no
-public link) and update the pending note.
+Then ask with buttons (the AskUserQuestion tool when it's available). Make the question
+self-contained, because the user may see only the dialog:
+- Question: "Drag the PDF into the Research papers folder in Drive
+  (https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2), then choose
+  Done. I'll name it and link it in Notion."
+- Options: **Done** ("It's in the folder") and **Do it later** ("Leave it marked as
+  pending").
+Without a button tool, ask them to reply "done" instead. Never ask them to rename the file,
+copy a link or paste anything. If they paste a link anyway, use it.
 
-## Step 2: attach it in Notion
+**After Done:**
+1. Find the file: search the folder for PDFs created since the time you noted
+   (`parentId = '1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2' and mimeType = 'application/pdf' and
+   createdTime > '<time>'`). If several match, pick the one whose title or size matches
+   the PDF you were given (`fileSize` equals the local file's size).
+2. If nothing is there yet, wait about 30 seconds and search once more. If it's still
+   missing, say so in one line, give the folder link again, and ask with the same buttons.
+3. Rename it to the file name above with the Drive update-file tool if it differs (people
+   often leave the original name, or end up with ".pdf.pdf").
+4. Fill in Drive Link (and Link, when the paper has no public page), add the `[PDF]` link
+   or the Drive title link on the Academic publications page, and remove the pending line.
+5. Reply in one line, for example: "All set: the PDF is in Drive and linked from
+   [the entry](link)."
 
-Do this after the Resource Library entry exists and, for third-party research, after the
-Academic publications page entry is written, so you know exactly where the file goes.
-
-1. Create an upload with the Notion create-file-upload tool (ToolSearch "notion file
-   upload"), using the file name above and `application/pdf`.
-2. Send the PDF to the returned `upload_url` in one multipart POST from the session's
-   shell: `curl -sS -X POST "<upload_url>" -H "authorization: <value from upload_headers>"
-   -F "file=@<path>;type=application/pdf"`. Include every header the tool returned.
-   Never print or repeat the authorization value to the user.
-   - If the cloud shell can't reach the upload URL (a proxy 403, a connection refused or a
-     "not allowed" network error), and the PDF is in a folder connected to the user's
-     computer, try the same command once in the device shell.
-   - Don't try anything else (no other hosts, no public file links). If neither shell can
-     send it, go to the drag-in fallback below.
-3. Place the file with a targeted edit, using the `markdown_source` the upload returns:
-   - **Academic publications page:** a file block on its own line directly under the
-     entry's title line, before its AI Summary toggle, the same way existing entries with
-     PDFs look:
-     ```
-     [Title](URL) \[<i>not peer reviewed</i>\]
-
-     <file source="file-upload://..." />
-
-     <toggle>
-     ...
-     ```
-   - **Resource Library entry:** the file block as the first block of the entry's page
-     body.
-4. Fetch once to confirm the file block is there.
-
-**Drag-in fallback.** When the upload can't be sent, tell the user in one short paragraph,
-with a link to the exact place:
-
-> I couldn't attach the PDF in Notion from this session, so it needs one quick drag:
-> open <link to the Academic publications page or the Resource Library entry>, find
-> "<paper title>" under <year> / <heading>, and drag the PDF onto the empty line just
-> below the title (above "AI Summary").
-
-Use the Resource Library wording ("drag the PDF onto the top of the page") when the
-attachment belongs there. Then mark it as pending (below).
+**After Do it later:** leave the pending line, and reply in one line that they can say
+"the PDF is in Drive" any time and you'll link it.
 
 ## Never leave a paper half-filed
 
-Every step still runs when another one is waiting on the user. Anything not finished is
-recorded in two places until it is done:
+Every other step runs while the Drive copy is waiting. Until it's done:
 - **In the entry.** Add a line at the end of the Introduction in the Detailed description:
-  `PDF pending: <what's missing, e.g. "Drive copy not uploaded yet" or "not attached on the
-  Academic publications page yet">.` Remove the line once it's done.
-- **In the report.** End with a short "Still to do" list, one line per pending item, each
-  with the exact step and the link. Leave the list out when nothing is pending.
+  `PDF pending: not in the Research papers folder yet.` Remove it once the file is linked.
+- **On the Academic publications page.** A paper with no public link still gets its entry,
+  as a bold title with no link (see `academic-publications-page.md`), swapped for the Drive
+  link later.
 
-When the user later says it's done (or pastes the Drive link), check it (search Drive, or
-fetch the page for the file block), fill in any field that was waiting, and remove the
-pending line.
+If the user comes back later in the same chat (or says "the PDF is in Drive"), run "After
+Done" from step 1.
 
 ## PDFs attached in Notion only
 
 When the only copy of a paper is a PDF already attached in Notion, it still needs a Drive
 copy. Notion file links point to Notion's file storage, which the session's network
-usually can't reach. The built-in browser on the user's computer can:
-
-1. Get a fresh signed link with the Notion get-file-download-urls tool (links expire after
-   about five minutes).
-2. Open it in the built-in browser and trigger a download to the user's Downloads folder
-   (fetch the file in the page, then click a temporary download link with the original
-   file name).
-3. With the user's permission for Downloads access and for removing files there, copy the
-   file into the Research papers folder under the new name, check the copy matches
-   (`cmp`), then remove the copy in Downloads.
-
-Ask before downloading, and say which files and roughly how large they are. Never remove
-anything else from Downloads. If that isn't possible, ask the user to download the PDF
-from Notion and attach it to the chat, then save it as in Step 1.
-
-## Report lines
-
-For the Drive copy, say one of:
-- "Saved the PDF to Research papers as `<file name>`: <link>".
-- "Used the PDF already in Research papers (`<file name>`): <link>".
-- "Drive copy pending: upload steps above."
-
-For the Notion attachment, say one of:
-- "Attached the PDF on <the Academic publications page / the Resource Library entry>".
-- "PDF attachment pending: one drag-in step above."
-
-When no PDF was involved, say nothing about PDFs.
+usually can't reach. Ask the user to download the PDF from Notion and attach it to the
+chat, then save it as above.
