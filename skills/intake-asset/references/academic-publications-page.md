@@ -38,12 +38,20 @@ link-less format, a bold title in its own paragraph:
 and mark it pending per `research-pdfs.md`. Swap in `[Title](Drive link)` once the Drive
 copy exists.
 
-When the user gave the paper as a PDF, the PDF is attached under this entry (SKILL.md Step
-3c and `research-pdfs.md`), as a file block on its own line directly below the title line
-and above the AI Summary toggle, the way existing entries with PDFs look. That attachment
-is the one exception to "never edit an existing entry": you may add the file block under
-an entry you wrote in this same intake, or under an existing entry for the same paper that
-has no file yet, but never replace or remove a file that is already there.
+**PDF link.** When a PDF of the paper is saved in Drive (Step 3a) and the title links to
+a public page (DOI or publisher), add a `PDF` link to the Drive copy at the end of the
+title line, after any other bracketed note, so people can open the full paper from Notion
+even when the public page is gated:
+
+```
+[Title](https://doi.org/...) \[<i>not peer reviewed</i>\] \[[PDF](https://drive.google.com/file/d/<id>/view)\]
+```
+
+When the title already links to the Drive file (no public link), don't add it. Never
+attach the PDF itself to the page. Adding this PDF link is the one exception to "never edit
+an existing entry": you may add it to an entry you wrote in this same intake, or to an
+existing entry for the same paper that has no PDF link or attached file yet, but never
+replace or remove a link or file that is already there.
 
 ## Step order
 
@@ -60,8 +68,8 @@ has no file yet, but never replace or remove a file that is already there.
    - A preprint and its published version count as the same paper.
    If any likely match exists, **do not write**. Report "Already on the Academic
    publications page" in the summary. Do not ask, and do not update the existing entry,
-   except to attach a PDF the user gave you when that entry has no file yet (see "When to
-   act").
+   except to add the PDF link when the user gave you a PDF and that entry has no PDF link
+   or file yet (see "When to act").
 3. **Find the year.** Use the publication year (the same date used for the Resource Library
    Last Updated). Year sections are level 1 headings in descending order, newest first,
    formatted exactly as `# <span color="blue">2026</span>`. If the year has no section yet,
@@ -108,8 +116,9 @@ has no file yet, but never replace or remove a file that is already there.
      the canonical link (the DOI link when there is one, otherwise the publisher page).
    - Optional bracketed notes on the same line, after a space, only in forms the page
      already uses: `\[<b>paywalled</b>\]`, `\[<i>not peer reviewed</i>\]`,
-     `\[Master’s thesis\]`. Add one only when it is true. A preprint filed under its
-     target journal always gets `\[<i>not peer reviewed</i>\]`.
+     `\[Master’s thesis\]`, and the `\[[PDF](Drive link)\]` link (see "When to act"). Add
+     one only when it is true. A preprint filed under its target journal always gets
+     `\[<i>not peer reviewed</i>\]`.
    - **Toggle, only when the year's section already uses them.** Check the existing
      entries in the target year's section. The 2026 section puts a toggle under each entry
      and the older years don't. If the section's entries carry toggles, add one directly
@@ -128,8 +137,8 @@ has no file yet, but never replace or remove a file that is already there.
      have the full abstract text. If the section's entries carry no toggles, add none.
    - Leave a blank line between blocks, as the page does.
    - Never add comments or mentions, or change any existing entry, heading or the page's
-     intro text. The only file you add is the user's PDF, under its own entry (see "When
-     to act").
+     intro text, and never attach files. The only addition to an existing entry is the
+     PDF link (see "When to act").
 6. **Insert with a targeted edit.** Use the update-page tool's `update_content` command
    with an `old_str` that uniquely anchors the insertion point, for example the full line
    of the next heading in the year (`### Ocean Dynamics`) plus enough of the following
@@ -164,7 +173,8 @@ Engineering Journal", so insert directly before `### Coastal Engineering Journal
 
 ## Report line
 
-In the final report, say one of:
+The short report only links the entry (SKILL.md Step 7). Use one of these when the user
+asks for details, or when the page was skipped for a reason they should know:
 - "Added to the Academic publications page under <year> / <publication>: <page link>".
 - "Already on the Academic publications page (matched <the existing entry's title>)."
 - "Skipped the Academic publications page: <reason>" (out of scope, no link, no unique
