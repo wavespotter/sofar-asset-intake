@@ -14,7 +14,7 @@ description: >
   third-party research papers to the Academic publications page if not already listed,
   and saves research PDFs to Drive.
 metadata:
-  version: "0.15.0"
+  version: "0.16.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -35,12 +35,13 @@ Take one marketing asset and file it into the right Sofar Notion databases:
    Type "Whitepaper / Research" with Third-Party? = Yes). If the paper is not already on
    the page, add it in the page's existing format. (Automatic, no confirmation.)
 6. **Research PDFs** (conditional): when someone gives you a paper as a PDF, save it to the
-   Research papers folder in Drive and attach it in Notion, so it can be opened from Notion
-   even when the paper is gated or has no web page.
+   Research papers folder in Drive and link it from Notion, so it can be opened from Notion
+   even when the paper is gated or has no web page. Nothing is attached in Notion.
 
-Many people at Sofar use this skill, not only marketing. Keep it simple for them: do the
-work, ask only what you can't work out, and when a step can't be done from the session,
-give one short, exact instruction (with the link) instead of skipping it.
+Many people at Sofar use this skill, not only marketing, and they usually just want the
+thing filed. Keep it simple for them: do the work, ask only what you can't work out, keep
+replies short, and when something needs them (like dragging a big PDF into Drive), ask for
+one small step with buttons instead of a list of instructions.
 
 **Prevent duplicates.** Before creating anything in any database, check whether it already
 exists and **warn and ask** on a likely match (update / add anyway / skip) — never silently
@@ -57,8 +58,8 @@ classifying:
 - `references/statistics-repository-schema.md`
 - `references/coverage-map-schema.md` — Case Study Coverage Map (Spotter customer stories only).
 - `references/academic-publications-page.md`: Academic publications page (third-party research only).
-- `references/research-pdfs.md`: research PDFs to Drive and attached in Notion, and
-  never leaving a paper half-filed (Whitepaper / Research only).
+- `references/research-pdfs.md`: research PDFs saved to Drive and linked from Notion, the
+  guided Drive step, and never leaving a paper half-filed (Whitepaper / Research only).
 
 ## Step 1 — Load the Notion tools
 
@@ -73,12 +74,13 @@ Load at least: a Notion **fetch**, **query-data-sources**, **create-pages**, and
 **update-page** tool. If none are found, stop and tell the user the Notion connector must
 be connected first (Settings → Connectors).
 
-When the user gave a research paper as a PDF, also load the Notion **create-file-upload**
-tool and the Google Drive connector's **search files** and **create file** tools
-(ToolSearch "notion file upload", "google drive search files create file"). If the Drive
-connector isn't connected, carry on and use the other paths in
-`references/research-pdfs.md`; mention once, in the report, that connecting Google Drive
-(Settings → Connectors) makes this automatic next time.
+When the user gave a research paper as a PDF, also load the Google Drive connector's
+**search files**, **create file**, **get file metadata** and **update file** tools
+(ToolSearch "google drive search files create file update file"), and the
+**AskUserQuestion** tool for the Done button. If the Drive connector isn't connected, carry
+on with the guided step in `references/research-pdfs.md`, and add one line to the report
+saying that connecting Google Drive (Settings → Connectors) lets Claude save small PDFs
+for them.
 
 If a write fails because the user lacks access to a database, page or folder, say which
 one in plain words and that the marketing team can grant it, then finish everything else.
@@ -91,7 +93,7 @@ one in plain words and that the marketing team can grant it, then finish everyth
 - **Uploaded file**: read it from the uploads folder.
 
 For a research paper provided as a PDF, or one that exists only as a PDF, also save the
-PDF to Drive (Step 3a) and attach it in Notion (Step 3c).
+PDF to Drive (Step 3a) and link it from Notion.
 
 Capture the asset's real title, body, author, publication date, and source URL.
 
@@ -192,13 +194,16 @@ Only for Content Type "Whitepaper / Research", and only when the user provided a
 paper exists only as a PDF. Never go looking for a PDF when the paper has a public link.
 Follow `references/research-pdfs.md`:
 1. Name it `<year> - <title>.pdf` and check the Research papers folder for an existing copy.
-2. Save it to the folder with the Google Drive connector (Path A, for PDFs up to about
-   3 MB; the user approves the upload). For a larger PDF or without the connector, use
-   their synced Drive folder (Path B). Otherwise give them the upload steps and folder link (Path C), word for word,
-   and file everything else without waiting.
+   You always name the file; never ask the user to rename anything.
+2. PDFs up to 3 MB: upload it with the Google Drive connector (Path A; the user approves
+   the upload). If the Research papers folder is already connected to the session, copy it
+   there (Path B). Otherwise (bigger files, or anything fails): file everything else first,
+   then use the guided step (Path C): the user drags the PDF into the folder and clicks
+   **Done**, and you find, rename and link it.
 3. Set **Drive Link** to the Drive file's link. If the paper has no public link, put the
    Drive link in **Link** too. Don't set Publicly Shareable? because a paper is paywalled;
-   customers often have their own access.
+   customers often have their own access. Until the file is in Drive, the entry carries a
+   `PDF pending:` line (see "Never leave a paper half-filed").
 
 ## Step 3b: Academic publications page (conditional, dedupe-first, automatic)
 
@@ -217,23 +222,11 @@ Follow `references/academic-publications-page.md`:
    label the page doesn't already have. A preprint that names its target journal (e.g.
    "manuscript in preparation for JGR: Oceans") goes under that journal's heading, tagged
    `[not peer reviewed]`; a preprint that names none goes under `Preprint`. A paper with
-   no public link uses its Drive link. If neither exists yet (Drive upload pending), still
-   add the entry, with the title in bold and no link, as older PDF-only entries do, and
-   mark it pending.
+   no public link uses its Drive link as the title link. A paper with a public link and a
+   Drive copy gets a `[PDF]` link to the Drive file at the end of its title line. If the
+   Drive copy is still pending, add the entry now (bold title with no link when there is
+   no public page) and add the Drive link once the file is in.
 4. Fetch the page again to confirm it landed in the right place, once.
-
-## Step 3c: Attach the PDF in Notion (conditional)
-
-Only when Step 3a ran (the user gave a PDF, or the paper exists only as a PDF). Follow
-"Step 2: attach it in Notion" in `references/research-pdfs.md`: attach the PDF once, under
-the paper's entry on the Academic publications page when it is there, otherwise at the top
-of the Resource Library entry's page. Upload it with the Notion create-file-upload tool and
-one POST from the session's shell. If the session can't send it, don't skip it: give the
-user the one-step drag-in instruction with the link to exactly where it goes.
-
-Then apply "Never leave a paper half-filed": anything still waiting on the user (the Drive
-copy or the attachment) gets a `PDF pending:` line in the entry's Detailed description and
-a line in the report's "Still to do" list.
 
 ## Step 4 — Customer Testimonials (conditional, confirm first)
 
@@ -295,23 +288,37 @@ study, whether or not it is already listed. Per `references/coverage-map-schema.
 
 ## Step 7 — Report
 
-Give the user links to everything created: the Resource Library entry, any testimonial
-rows, any statistic candidate (noting it's under review), and any Case Study Coverage Map
-row (or a note that the case study was already mapped). Add a one-line note on how each was
-classified so the user can correct anything. For the Resource Library entry, always say how
-Origin was set (Official, or Custom and for which Customer / Prospect, and why), and,
-for any tool or demo, whether it was filed as "Tool" (internal) or "Interactive Tool / Demo"
-(customer-facing) and why. For research, say how Sofar Reference was set and why, any caveat for reps, where
-the PDF was saved and where it was attached in Notion (or that either is pending) when
-there was one, and
-give the Academic publications page result (added, with the year and heading, already
-listed, or skipped and why). If later steps were skipped because the asset is Custom or
-a Tool, say so. End with a short "Still to do" list when anything is waiting on the user,
-one line per item with the exact step and link, and leave it out when nothing is.
+Most people just want to know it's filed. Keep the report to a few lines:
 
-Keep the report short and in plain words. The person filing may not know the databases,
-so lead with links to what was created and only explain a classification they might want
-to change.
+```
+✅ Filed: [<title>](<Resource Library link>)
+Also on: [Academic publications page](<page link>) under <year> / <heading>
+<at most two "worth knowing" lines>
+<the one last step, only when something is waiting on the user>
+Reply "details" to see how it was classified.
+```
+
+- **Created items:** link the Resource Library entry, plus anything else created (the
+  Academic publications entry, testimonial rows, a statistic candidate "under review", a
+  Coverage Map row). Testimonials, Statistics and the Coverage Map ask for confirmation
+  before writing, as above, so those questions come before the report.
+- **"Worth knowing" lines, only when true:**
+  - Sofar Reference is Passing or None: don't send the paper to customers as product proof.
+  - The paper has a "Caveat for reps".
+  - Origin is Custom: internal-only unless they say it can go to customers.
+  - It was filed as an internal Tool rather than a customer-facing demo.
+  - Something was skipped as a likely duplicate, or a write failed for lack of access.
+- **Leave out by default:** the classification of each field, steps that didn't apply
+  (no quotes, no new stats, not a customer story), and technical reasons such as file-size
+  limits or upload errors.
+- **One last step:** when the PDF still needs to go to Drive, end with the guided step from
+  `references/research-pdfs.md` (one line, then the Done / Do it later buttons). Never
+  list more than one step.
+- **"details":** when the user asks, give the full breakdown: Product, Content Type, Use
+  Case, Origin and why, Sofar Reference and why, the Academic publications result, where the
+  PDF was saved, and which steps were skipped and why.
+
+Write in plain words. The person filing may not know the databases.
 
 ## Notes
 
@@ -324,6 +331,7 @@ to change.
   dedupe-aware, and never approved. The Coverage Map step runs only for Spotter customer
   stories, and most published case studies are already mapped. The Academic publications
   page step is direct (no confirmation) but adds only papers that aren't already listed,
-  and never edits existing entries. Research PDFs go to the Research papers folder in Drive
-  (the master copy) and are attached once in Notion; when either can't be done from the
-  session, the user gets one exact step and the paper is marked pending, never half-filed.
+  and never edits existing entries (except to add a PDF link). Research PDFs live only in
+  the Research papers folder in Drive and are linked from Notion, never attached. When
+  Claude can't save one itself, the user gets one guided step with a Done button, and the
+  paper is marked pending until it's in, never half-filed.
