@@ -24,10 +24,26 @@ and Sofar's own white papers (Third-Party? = No), datasets, talks and slides, ar
 and anything Custom. A paper written by Sofar staff but published in a journal is
 Third-Party? = Yes, so it is in scope.
 
-The page step needs a link. When the paper has no public link, use its Drive link from
-Step 3a (the page is internal, and the entry format is the same `[Title](URL)`). Never
-attach the PDF to the page. If there is no link of either kind yet (for example the manual
-upload is still pending), skip the page and say so in the report.
+When the paper has no public link, use its Drive link from Step 3a (the page is internal,
+and the entry format is the same `[Title](URL)`). If there is no link of either kind yet
+(the Drive upload is still pending), still add the entry, using the page's existing
+link-less format, a bold title in its own paragraph:
+
+```
+<p>
+<b>Title</b> 
+</p>
+```
+
+and mark it pending per `research-pdfs.md`. Swap in `[Title](Drive link)` once the Drive
+copy exists.
+
+When the user gave the paper as a PDF, the PDF is attached under this entry (SKILL.md Step
+3c and `research-pdfs.md`), as a file block on its own line directly below the title line
+and above the AI Summary toggle, the way existing entries with PDFs look. That attachment
+is the one exception to "never edit an existing entry": you may add the file block under
+an entry you wrote in this same intake, or under an existing entry for the same paper that
+has no file yet, but never replace or remove a file that is already there.
 
 ## Step order
 
@@ -43,7 +59,9 @@ upload is still pending), skip the page and say so in the report.
      (`name=...pdf`), where underscores stand for spaces.
    - A preprint and its published version count as the same paper.
    If any likely match exists, **do not write**. Report "Already on the Academic
-   publications page" in the summary. Do not ask, and do not update the existing entry.
+   publications page" in the summary. Do not ask, and do not update the existing entry,
+   except to attach a PDF the user gave you when that entry has no file yet (see "When to
+   act").
 3. **Find the year.** Use the publication year (the same date used for the Resource Library
    Last Updated). Year sections are level 1 headings in descending order, newest first,
    formatted exactly as `# <span color="blue">2026</span>`. If the year has no section yet,
@@ -109,8 +127,9 @@ upload is still pending), skip the page and say so in the report.
      Use `<b>Abstract</b>` with the abstract copied word for word instead, only when you
      have the full abstract text. If the section's entries carry no toggles, add none.
    - Leave a blank line between blocks, as the page does.
-   - Never attach files, add comments or mentions, or change any existing entry, heading
-     or the page's intro text.
+   - Never add comments or mentions, or change any existing entry, heading or the page's
+     intro text. The only file you add is the user's PDF, under its own entry (see "When
+     to act").
 6. **Insert with a targeted edit.** Use the update-page tool's `update_content` command
    with an `old_str` that uniquely anchors the insertion point, for example the full line
    of the next heading in the year (`### Ocean Dynamics`) plus enough of the following
