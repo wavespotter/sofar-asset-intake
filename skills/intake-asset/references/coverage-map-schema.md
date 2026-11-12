@@ -14,7 +14,7 @@ asset. Always confirm the live option lists by fetching the database first.
 
 Only consider this database when the asset is a **Spotter customer story / case study**,
 i.e. the Resource Library classification was Product = Spotter and Content Type =
-"Customer Story". For anything else (Wayfinder content, articles, brand assets, webinars,
+"Customer stories". For anything else (Wayfinder content, articles, brand assets, webinars,
 tools), do nothing here.
 
 Most published case studies are already in this map (it was seeded with the existing
