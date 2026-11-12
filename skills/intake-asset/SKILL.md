@@ -14,7 +14,7 @@ description: >
   third-party research papers to the Academic publications page if not already listed,
   and saves research PDFs to Drive.
 metadata:
-  version: "0.16.0"
+  version: "0.17.0"
   author: "Sofar Ocean Marketing"
 ---
 
@@ -32,7 +32,7 @@ Take one marketing asset and file it into the right Sofar Notion databases:
    study is not already mapped, draft a row, **confirm with the user** (especially Depth and
    Geography), then add it. Dedupe first; most published case studies are already there.
 5. **Academic publications page** (conditional): only for third-party research (Content
-   Type "Whitepaper / Research" with Third-Party? = Yes). If the paper is not already on
+   Type "Research papers" with Third-Party? = Yes). If the paper is not already on
    the page, add it in the page's existing format. (Automatic, no confirmation.)
 6. **Research PDFs** (conditional): when someone gives you a paper as a PDF, save it to the
    Research papers folder in Drive and link it from Notion, so it can be opened from Notion
@@ -59,7 +59,7 @@ classifying:
 - `references/coverage-map-schema.md` — Case Study Coverage Map (Spotter customer stories only).
 - `references/academic-publications-page.md`: Academic publications page (third-party research only).
 - `references/research-pdfs.md`: research PDFs saved to Drive and linked from Notion, the
-  guided Drive step, and never leaving a paper half-filed (Whitepaper / Research only).
+  guided Drive step, and never leaving a paper half-filed (Research papers only).
 
 ## Step 1 — Load the Notion tools
 
@@ -110,20 +110,21 @@ do not create blindly. (A title match often catches a duplicate a URL check miss
 the asset's PDF is stored under `Drive Link` and the blog URL under `Link`.)
 
 If it's not a duplicate, then following `references/resource-library-schema.md`, fill Title,
-Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category, Third-Party?
+Summary, Product, Content Type, Smart Mooring Sensor(s), Use Case Category (up to 5), Topic
+(up to 3), Website status (only Not on hub, in the cases the schema lists), Third-Party?
 (Yes when the asset is published outside Sofar Ocean's own properties — third-party media,
 external blogs, research journals — else No), Source (the publication/outlet/journal name
 when Third-Party? = Yes; blank otherwise), Origin, Customer / Prospect (Custom assets
 made for a specific account), Link, Last Updated (today, via bash `date +%F`),
 the Detailed description (for AI parsing), Tutorial Videos (only when video links are
-given; see the Tool rules below), and, for Whitepaper / Research only, Sofar Reference
+given; see the Internal tool rules below), and, for Research papers only, Sofar Reference
 (see below). Create
 the entry with the create-pages tool, parent = the Resource Library `data_source_id`.
 
 Before filling the fields, settle these classifications (full rules in
 `references/resource-library-schema.md`):
 
-**Sofar Reference (Whitepaper / Research only): Central, Passing or None.** It records how
+**Sofar Reference (Research papers only): Central, Passing or None.** It records how
 much the paper references Sofar's products or data, so reps never send a paper as product
 proof when it doesn't reference us. Central: Sofar products, data or forecasts are a real
 part of the study (Spotter validations, studies using Spotter, Smart Mooring, Wayfinder or
@@ -153,13 +154,14 @@ made", or the user saying a rep made it. For a Custom asset:
   customer or prospect. Leave it blank only when it's a general asset the rep made for
   reuse (e.g. a rep's own version of a pitch deck).
 - Set **Content Type** to the kind of asset it is, exactly as for an Official one
-  (Presentation for a deck, Sales Collateral for a one-pager or spec sheet, Webinar / Video
-  for a recording, and so on). Origin never changes the Content Type; there is no "Custom" Content Type.
+  (Presentation for a deck, Spec sheets for a product one-pager or spec sheet, Videos and
+  podcasts for a recording, and so on). Origin never changes the Content Type; there is no "Custom" Content Type.
 - Always put the asset's shareable URL (e.g. the Google Slides, Docs or Drive link) in
   **Link**, not only in Drive Link. The library opens Link when someone clicks the card;
   Drive Link only powers the Download button.
 - Leave **Publicly Shareable?** empty unless the user explicitly says the asset can go to
   customers. The library treats Custom assets as internal-only unless it's Yes.
+- Set **Website status** to Not on hub.
 - Skip Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map). The content is one-off or
   hasn't been reviewed by marketing.
 
@@ -167,17 +169,25 @@ Use judgment from the signs above. Ask the user only when the asset could plausi
 either and nothing points one way, or when it's clearly for one account but you can't tell
 which.
 
-**Tool or Interactive Tool / Demo.** Use Content Type "Tool" for internal web utilities that
-Sofar staff open and use rather than share (e.g. an email signature generator or a quote
-calculator); Tools appear on a separate Tools tab. Use "Interactive Tool / Demo" only for
-customer-facing demos, configurators, dashboards and datasets, which stay in the main library.
+**Content Type: which of the 14.** Pick by format and purpose, never by subject, using the
+definitions and tie-breakers in `references/resource-library-schema.md`. The ones that need
+care: published in a journal or as a preprint is Research papers, whoever wrote it, while
+anything Sofar publishes itself (blog posts, white papers, savings reports, explainers) is
+Guides and reports, Product updates or News and press. About our product is a Product
+update. About a subject, even when the product appears in it, is a Guide or report.
+
+**Internal tool or Tools and demos.** Use Content Type "Internal tool" for internal web
+utilities that Sofar staff open and use rather than share (e.g. an email signature generator
+or a quote calculator). They appear on the internal library's Tools page. Use "Tools and
+demos" only for customer-facing demos, configurators and dashboards, which stay in the main
+library. Third-party datasets are Research papers.
 If a link could be either, ask the user whether it's an internal tool or something customers
-see. For a Tool:
+see. For an Internal tool:
 - **Link** (the tool's web address) is required.
 - **Summary** is required: one or two plain sentences saying what the tool does, because it's
   the description shown on the tool's tile.
-- Product, Smart Mooring Sensor(s), Use Case Category and Stage in Buyer's Journey are
-  optional. Third-Party? = No.
+- Product, Smart Mooring Sensor(s), Use Case Category, Topic and Stage in Buyer's Journey
+  are optional. Third-Party? = No. Website status = Not on hub.
 - **Tutorial Videos** is optional: the training, demo or tutorial videos (e.g. Loom). For one
   video, put just the link. For several, put one per line as `Title: link` (e.g.
   `Pt 1: How to Create: https://www.loom.com/share/...`). The card shows "Watch tutorial" for
@@ -185,12 +195,12 @@ see. For a Tool:
   whether there are any. Never invent or search for a video.
 - Optionally set the page icon to one fitting emoji; the tile shows it.
 - If the tool also has a public, customer-facing version, file that as a separate
-  Interactive Tool / Demo entry with its own Link rather than combining them.
+  Tools and demos entry with its own Link rather than combining them.
 - Skip Steps 4, 5 and 6.
 
 ## Step 3a: Research PDF to Drive (conditional)
 
-Only for Content Type "Whitepaper / Research", and only when the user provided a PDF or the
+Only for Content Type "Research papers", and only when the user provided a PDF or the
 paper exists only as a PDF. Never go looking for a PDF when the paper has a public link.
 Follow `references/research-pdfs.md`:
 1. Name it `<year> - <title>.pdf` and check the Research papers folder for an existing copy.
@@ -207,7 +217,7 @@ Follow `references/research-pdfs.md`:
 
 ## Step 3b: Academic publications page (conditional, dedupe-first, automatic)
 
-Only when the asset is third-party research: Content Type "Whitepaper / Research" with
+Only when the asset is third-party research: Content Type "Research papers" with
 Third-Party? = Yes. Otherwise skip this step. Run it whether the Resource Library entry was
 just created, updated, or skipped as a duplicate (then use the existing entry's
 classification), because a paper can be in the library and still be missing from the page.
@@ -265,7 +275,7 @@ If one exists:
 ## Step 6 — Case Study Coverage Map (conditional, Spotter customer stories, confirm first)
 
 Only when the Resource Library classification was **Product = Spotter** and **Content Type =
-"Customer Story"**. Otherwise skip this step entirely (it never runs for Tools or
+"Customer stories"**. Otherwise skip this step entirely (it never runs for Internal tools or
 Custom assets).
 
 Run it for **every** Spotter customer story so the Coverage Map always reflects the case
@@ -315,7 +325,7 @@ Reply "details" to see how it was classified.
   `references/research-pdfs.md` (one line, then the Done / Do it later buttons). Never
   list more than one step.
 - **"details":** when the user asks, give the full breakdown: Product, Content Type, Use
-  Case, Origin and why, Sofar Reference and why, the Academic publications result, where the
+  Case, Topic, Website status, Origin and why, Sofar Reference and why, the Academic publications result, where the
   PDF was saved, and which steps were skipped and why.
 
 Write in plain words. The person filing may not know the databases.
