@@ -27,7 +27,7 @@ this asset." The skill will:
    looks for empty or improvable fields and **proposes filling those in** (never overwriting
    a human-set value without asking).
 5. **List third-party research on the Academic publications page.** For research papers
-   published outside Sofar (Content Type Whitepaper / Research, Third-Party? = Yes), it
+   published outside Sofar (Content Type Research papers, Third-Party? = Yes), it
    checks the "Academic publications featuring Sofar / Spotter" page and, if the paper isn't
    already listed, adds it under the right year and publication in the page's existing
    format. It never edits existing entries. Research entries also get a **Sofar Reference**
