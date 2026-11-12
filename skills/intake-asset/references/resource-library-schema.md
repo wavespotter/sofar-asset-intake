@@ -13,14 +13,16 @@ the intended set, but the live schema wins if they differ.
 | Title | title | The asset's real headline. |
 | Summary | rich_text | One short, factual sentence in house style. Required for a Tool (shown on its tile); see "Internal tools". |
 | Product | multi_select | Spotter and/or Wayfinder. |
-| Content Type | select | Exactly one of the 12 values below. |
+| Content Type | select | Exactly one of the 14 values below. |
 | Smart Mooring Sensor(s) | multi_select | Sensors named; see rule. |
-| Use Case Category | multi_select | 1–3 primary, or empty for horizontal assets. |
+| Use Case Category | multi_select | Up to 5, only for buyers the asset speaks to directly, or empty for horizontal assets. |
+| Topic | multi_select | Up to 3 main subjects, or empty. See "Topic". |
+| Website status | select | Only Not on hub, and only in the cases listed under "Website status". Otherwise leave blank. |
 | Third-Party? | select | "Yes" or "No" — classify by publication venue; see rule. |
 | Source | rich_text | Publication/outlet/journal name when Third-Party? = Yes; see rule. |
 | Origin | select | "Official" (default) or "Custom"; see "Origin and Customer / Prospect". |
 | Customer / Prospect | rich_text | Account name. Only for Custom assets made for a specific customer or prospect. |
-| Sofar Reference | select | Whitepaper / Research only: Central, Passing or None. See "Sofar Reference". Leave blank for every other Content Type. |
+| Sofar Reference | select | Research papers only: Central, Passing or None. See "Sofar Reference". Leave blank for every other Content Type. |
 | Link | url | Canonical URL. For a Custom asset, its shareable Slides/Docs/Drive URL; for a Tool, its web address (required). |
 | Last Updated | date | Publication date for dated assets; intake date for living docs. See "Last Updated rule". |
 | Detailed description (for AI parsing) | rich_text | Structured block (see format). |
@@ -28,7 +30,7 @@ the intended set, but the live schema wins if they differ.
 
 Do **not** set: `Partners Only?` (checkbox, governance), `Publicly Shareable?`,
 `New Hire?`, `Partner`, `Featured On`, `Stage in Buyer's Journey`, `Spotter Solution`,
-`Drive Link` — unless the user explicitly asks. These are managed by people/other flows.
+`Drive Link`, `Webflow item ID` — unless the user explicitly asks. These are managed by people/other flows.
 The one exception is a research PDF saved to the Research papers folder: then set Drive
 Link (and Link, when the paper has no public link), per `research-pdfs.md`. A paywalled
 paper does not change Publicly Shareable?: customers often have their own access.
@@ -41,7 +43,7 @@ and Drive Link only powers the Download button. For Custom assets in particular,
 
 - Multi-selects are JSON-array strings, e.g. `"Product": "[\"Spotter\"]"`,
   `"Use Case Category": "[\"Offshore Renewables\",\"Coastal Management\"]"`.
-- Select is a plain string, e.g. `"Content Type": "Customer Story"`, `"Origin": "Custom"`.
+- Select is a plain string, e.g. `"Content Type": "Customer stories"`, `"Origin": "Custom"`.
 - Text is a plain string, e.g. `"Customer / Prospect": "Acme Offshore Wind"`.
 - Date uses the expanded key: `"date:Last Updated:start": "2026-06-17"`.
 
@@ -53,36 +55,76 @@ Options: **Spotter**, **Wayfinder**.
 - **Wayfinder** = voyage optimization, routing, fuel savings, shipping operations.
 - Can be both, or neither (some brand/company assets have no product).
 
-## Content Type (select) — 12 values + disambiguation
+## Content Type (select), 14 values + disambiguation
 
-`Article`, `Customer Story`, `Webinar / Video`, `Sales Collateral`,
-`Whitepaper / Research`, `Webpage / FAQ`, `Interactive Tool / Demo`, `Presentation`,
-`Enablement`, `Creative / Brand Asset`, `Tool`, `Other`.
+Nine website types (a row reaches the public resources hub only when a person sets Website
+status to On hub, never because of its Content Type):
 
-- **Article** — blog posts, news, press releases, announcements.
-- **Customer Story** — case studies / customer success stories.
-- **Webinar / Video** — webinars, recorded talks, videos, podcasts.
-- **Sales Collateral** — one-pagers, spec sheets, booklets, media kits.
-- **Whitepaper / Research** — academic papers, scientific studies, technical evaluations.
-- **Webpage / FAQ** — product webpages, FAQs, guides.
-- **Interactive Tool / Demo** — customer-facing tools, dashboards, demos, configurators,
-  calculators, scenario builders, web apps, live dashboards, data archives/repositories.
-  These stay in the main library.
-- **Tool**: internal web utilities that Sofar staff open and use rather than share, e.g. an
-  email signature generator or a quote calculator. These appear on a separate Tools tab. See
-  "Internal tools (Content Type = Tool)".
-- **Presentation** — slide decks, including custom decks made for one customer. Custom
+- **Customer stories**: how a real customer used Spotter or Wayfinder (case studies,
+  customer success stories). One customer's story, in any format except a webinar.
+- **Research papers**: published in a journal, at a conference or as a preprint, by anyone,
+  including Sofar staff. Also theses, technical or government reports, and datasets and
+  supporting materials that go with research (including third-party data archives).
+- **Webinars and events**: webinar recordings and event pages.
+- **Videos and podcasts**: on-demand videos a buyer would watch to evaluate or use the
+  product (how-tos, demos, field footage, customer stories on video), plus Sofar podcasts.
+  Videos come first.
+- **Tools and demos**: customer-facing tools, dashboards, demos, configurators, calculators,
+  scenario builders and live dashboards. These stay in the main library.
+- **Spec sheets**: product and sensor spec sheets, product booklets and product one-pagers.
+- **Product updates**: Sofar launches, new features and how the product works.
+- **Guides and reports**: in-depth Sofar content that explains a subject or shares
+  analysis: explainers, how-to guides, Sofar blog posts that summarize a paper, white
+  papers, and reports such as savings reports and fuel savings snapshots. Articles and
+  downloadable documents both belong here.
+- **News and press**: press releases, partnerships, funding, team stories (including team
+  Q&As), and coverage by outside media, including outside podcasts and interviews.
+
+Five internal-only types (never on the hub):
+
+- **Presentation**: slide decks, including custom decks made for one customer. Custom
   assets use the same Content Types as Official ones; Origin never changes the Content
   Type, so never invent a "Custom" Content Type.
-- **Enablement** — internal or partner enablement / sales-training / onboarding material.
-- **Creative / Brand Asset** — photo/video directories, logos, brand books, renderings,
-  design files.
-- **Other** — only when nothing above fits.
+- **Enablement**: internal or partner enablement, sales training and onboarding material.
+- **Creative / Brand Asset**: logos, photo and video directories, brand books, media kits,
+  renderings and design files.
+- **Webpage / FAQ**: product webpages, site pages and FAQs.
+- **Internal tool**: internal web utilities that Sofar staff open and use rather than share,
+  e.g. an email signature generator or a quote calculator. These appear on the internal
+  library's Tools page. See "Internal tools (Content Type = Internal tool)".
 
-**Tool vs. Interactive Tool / Demo:** ask who uses it. Internal staff utility → Tool.
-Something customers see or use (demo, configurator, dashboard, dataset) → Interactive Tool /
-Demo. If a link could be either, ask the user whether it's an internal tool or something
-customers see.
+There is no Other option. If nothing fits, ask the user.
+
+**Tie-breakers:**
+- Published in a journal, conference proceedings or as a preprint is a Research paper,
+  whoever wrote it. Published by Sofar, as an article or a downloadable document, is a Guide
+  or report.
+- About our product is a Product update. About a subject, even when our product appears in
+  it, is a Guide or report.
+- One customer's story is a Customer story. A report that pools results across customers,
+  like a savings report, is a Guide or report.
+- A product launch or new feature is a Product update. Anything about the company, a
+  partnership, funding, the team, or coverage written by someone else is News and press.
+- A webinar recording stays Webinars and events, so the series lives in one place.
+- A customer story told on video is Videos and podcasts. A written customer story is
+  Customer stories.
+- An outside podcast or interview with a Sofar person is News and press. Sofar's own
+  podcast is Videos and podcasts.
+
+**Internal tool vs. Tools and demos:** ask who uses it. Internal staff utility → Internal
+tool. Something customers see or use (demo, configurator, dashboard) → Tools and demos. If
+a link could be either, ask the user whether it's an internal tool or something customers
+see.
+
+**During the switch (old option names).** The options were renamed on 13 November 2026.
+The fetch in Step 1 shows the live names. If the live Content Type options still use the
+old names, use the old name that matches and never create a new option by writing an
+unknown value: Customer Story (Customer stories), Whitepaper / Research (Research papers),
+Webinar / Video (Webinars and events, Videos and podcasts), Interactive Tool / Demo (Tools
+and demos), Sales Collateral (Spec sheets), Article (Product updates, Guides and reports,
+News and press), Tool (Internal tool). Every rule in these references that names a new
+type applies to its old name in the same way. Do the same for Topic and Website status:
+fill them only when the property exists.
 
 ## Origin (select) and Customer / Prospect (rich_text)
 
@@ -105,8 +147,8 @@ When Origin = Custom:
   the asset was made for a specific customer or prospect. Leave it blank for a general asset
   a rep made for reuse, and always blank for Official assets.
 - **Content Type**: the kind of asset it is, using the same rules as for Official assets
-  (Presentation for a deck, Sales Collateral for a one-pager or spec sheet, Webinar / Video
-  for a recording, and so on). Never invent a "Custom" Content Type.
+  (Presentation for a deck, Spec sheets for a product one-pager or spec sheet, Videos and
+  podcasts for a recording, and so on). Never invent a "Custom" Content Type.
 - **Link**: always the asset's shareable URL (e.g. the Google Slides, Docs or Drive link),
   not only Drive Link. The library opens Link when someone clicks the card; Drive Link only
   powers the Download button.
@@ -117,7 +159,7 @@ When Origin = Custom:
 - Skip Testimonials, Statistics and the Coverage Map (SKILL.md Steps 4, 5 and 6): the content
   is one-off or hasn't been reviewed by marketing.
 
-## Internal tools (Content Type = Tool)
+## Internal tools (Content Type = Internal tool)
 
 | Field | Rule |
 |---|---|
@@ -133,8 +175,8 @@ When Origin = Custom:
 Skip SKILL.md Steps 4, 5 and 6 (Testimonials, Statistics, Coverage Map) for tools.
 
 When a tool has both an internal version and a public, customer-facing version, catalogue them
-as two separate entries: the internal one as a Tool (Tools page) and the public one as an
-Interactive Tool / Demo (main library), each with its own Link. Mention the other version in
+as two separate entries: the internal one as an Internal tool (Tools page) and the public one
+as Tools and demos (main library), each with its own Link. Mention the other version in
 each entry's Detailed description.
 
 ## Smart Mooring Sensor(s) (multi_select)
@@ -162,16 +204,76 @@ Rules:
 `Shipping & Logistics`.
 
 Rules:
-- Pick **1–3 genuinely primary** categories (max 4). Quality over quantity.
+- **Buyer before activity.** Tag the categories whose buyers the asset is for, judged
+  against the company definitions, not every category whose activity it mentions. A
+  hurricane paper for researchers is Ocean Science & Research even though it mentions
+  coastal flooding.
+- **Maximum 5**, and only categories whose buyer or specific problem the asset names,
+  never every category it could apply to. Broad product content can carry several (a
+  Spotter Sound post that names MPA monitoring, pile-driving compliance, port monitoring,
+  harbor security and soundscape research carries all five). Most assets carry 1 or 2.
+- Customer stories always carry the customer's category.
 - **Horizontal assets → leave empty**: general platform/company overviews, brand assets,
   internal tools/demos/configurators/repositories not tied to a specific industry. (For
-  Content Type = Tool, this field is optional and usually blank.)
+  Content Type = Internal tool, this field is optional and usually blank.)
 - Wayfinder / voyage / fuel / routing content → **Shipping & Logistics**.
 - Customer stories and research papers almost always map to at least one category.
 - Disambiguation: research/academic/data/climate/oceanography → **Ocean Science &
   Research**; habitat/MPA/biodiversity/coral/species → **Conservation & Marine
   Protection**; storm surge / sea level / shoreline / flood / coastal engineering →
   **Coastal Management**.
+
+## Topic (multi_select), 11 values
+
+`Waves`, `Currents`, `Water temperature`, `Water level`, `Water quality`,
+`Underwater sound`, `Weather and forecasts`, `Storms and extreme events`,
+`Vessel performance`, `Emissions and regulation`, `Accuracy and validation`.
+
+Topic answers "what is this asset about?" across products and industries.
+
+- **Waves**: wave height, period, direction and spectra, plus the surface data Spotter
+  reports alongside them (barometric pressure, estimated wind). Observations, not forecasts.
+- **Currents**: surface and subsurface currents and drift.
+- **Water temperature**: temperature through the water column (stratification, profiling).
+  Surface temperature alone does not qualify.
+- **Water level**: tides, surge and water level measurement.
+- **Water quality**: dissolved oxygen, salinity, pH, turbidity, chlorophyll, eDNA and the
+  temperature measured alongside them.
+- **Underwater sound**: acoustics, hydrophones, marine mammals and underwater noise.
+- **Weather and forecasts**: how marine forecasts are made, how ocean data improves them,
+  and how they are used to make decisions.
+- **Storms and extreme events**: hurricanes, typhoons, El Niño and other extremes, and how
+  people measured or coped with them.
+- **Vessel performance**: speed and fuel models, hull fouling, wind-assisted propulsion.
+- **Emissions and regulation**: CII, EU ETS and decarbonization rules for shipping.
+- **Accuracy and validation**: tests how accurate Sofar's data or forecasts are, compares
+  them with other systems, or uses Spotter as the trusted reference to check something else.
+
+Rules:
+- Tag a topic only when it is a main subject, meaning the asset would be a good answer to
+  "show me resources about this." **Maximum 3.** Empty is fine.
+- Tag both Weather and forecasts and Storms and extreme events only when the asset is about
+  forecasting a specific extreme event.
+- Tag Accuracy and validation only when testing or comparing accuracy is the point of the
+  asset, never because it calls something accurate.
+- Never invent a topic. New topics are added through review, not during intake.
+- Internal tools, brand assets, decks and enablement material usually get none.
+
+Write format: `"Topic": "[\"Storms and extreme events\",\"Waves\"]"`.
+
+## Website status (select) and Webflow item ID (rich_text)
+
+**Website status** options: On hub, Not on hub, Retired. It is the only gate for the
+public resources hub on sofarocean.com, and blank never reaches the website. A person in
+marketing decides On hub and Retired, never intake.
+
+- Set **Not on hub** when the asset clearly cannot go on the public hub: any internal-only
+  Content Type (Presentation, Enablement, Creative / Brand Asset, Webpage / FAQ, Internal
+  tool), Origin = Custom, Partners Only? checked, or the user says it must not be shared.
+- Otherwise leave it **blank** for marketing to review.
+- Never set On hub or Retired, and never change an existing value.
+
+**Webflow item ID**: leave blank. It is filled when the asset's page is created in Webflow.
 
 ## Third-Party? (select) and Source (rich_text)
 
@@ -194,11 +296,11 @@ it is about:
 Write format: both are plain strings, e.g. `"Third-Party?": "Yes"`,
 `"Source": "ECO Magazine"`.
 
-## Sofar Reference (select), Whitepaper / Research only
+## Sofar Reference (select), Research papers only
 
-Options: **Central**, **Passing**, **None**. Set it on every Whitepaper / Research entry,
-including Sofar's own papers and white papers. Leave it blank for every other Content
-Type. It works the same for every product (Product says which one), so it records only how
+Options: **Central**, **Passing**, **None**. Set it on every Research papers entry,
+including papers by Sofar staff. Leave it blank for every other Content Type, including
+Guides and reports (Sofar's own white papers and reports). It works the same for every product (Product says which one), so it records only how
 much the paper references Sofar.
 
 - **Central:** Sofar's products, data or forecasts are a real part of the study:
