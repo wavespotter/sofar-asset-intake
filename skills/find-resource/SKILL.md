@@ -2,7 +2,7 @@
 name: find-resource
 description: "Use when anyone at Sofar asks whether Sofar already has material on a topic, or wants something to cite or send: research papers, validations, case studies, customer quotes, statistics, spec sheets, decks, webinars, one-pagers, demos or tools. Trigger on questions like \"do we have any papers on Spotter's SST accuracy\", \"is there a case study for ports in Europe\", \"what can I send a customer about Smart Mooring\", \"find me a quote from an offshore wind customer\", \"do we have a stat on Wayfinder fuel savings\" or \"where's the deck for...\", even when no database is named. Searches Sofar's Resource Library first, then the Statistics, Testimonials and Case Study Coverage Map databases, then wider Notion and Drive, then the web, and labels every result for whether it can go to customers. Read-only. To file a new asset use intake-asset; for deal coaching use what-would-jarrah-do."
 metadata:
-  version: "0.14.0"
+  version: "0.17.0"
   author: "Sofar Ocean Marketing"
 ---
 
