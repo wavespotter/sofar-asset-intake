@@ -16,9 +16,10 @@ of truth. Fields that matter for finding and labeling:
 |---|---|
 | Title, Summary | What the asset is. |
 | Detailed description (for AI parsing) | The fullest account: authors, numbers, method, and any line starting `- Caveat for reps:`. Always read it before describing a result. |
-| Content Type | Article, Customer Story, Webinar / Video, Sales Collateral, Whitepaper / Research, Webpage / FAQ, Interactive Tool / Demo, Presentation, Enablement, Creative / Brand Asset, Tool, Other. |
+| Content Type | Website types: Customer stories, Research papers, Webinars and events, Videos and podcasts, Tools and demos, Spec sheets, Product updates, Guides and reports, News and press. Internal-only: Presentation, Enablement, Creative / Brand Asset, Webpage / FAQ, Internal tool. Rows filed before 13 November 2026 may show the old names (Article, Customer Story, Webinar / Video, Sales Collateral, Whitepaper / Research, Interactive Tool / Demo, Tool, Other) until the switch is done: treat them as the matching new type. |
 | Product | Spotter and/or Wayfinder. |
-| Smart Mooring Sensor(s), Spotter Solution, Use Case Category | Topic filters. |
+| Smart Mooring Sensor(s), Spotter Solution, Use Case Category, Topic | Topic filters. Use Case Category says which buyers it is for (up to 5). Topic says what it is about (up to 3). |
+| Website status | On hub means it is live on the public resources hub. Not a sharing label on its own. |
 | Third-Party?, Source | Yes plus the venue when published outside Sofar (journal, outlet, institute). |
 | Sofar Reference | Research only. Central, Passing or None. Only Central is evidence about Sofar's products. |
 | Origin, Customer / Prospect | Official (general use) or Custom (made for one account, or made outside marketing and not reviewed). |
@@ -83,7 +84,8 @@ Apply the first rule that matches, top to bottom.
 2. Origin = Custom and Publicly Shareable? is not Yes: **Internal only**, "made for
    <Customer / Prospect>" (or "rep-made, not reviewed by marketing" when that field is blank).
 3. Partners Only? is checked: **Partners only**.
-4. Content Type = Tool or Enablement: **Internal only** (staff tool or training material).
+4. Content Type = Internal tool (or the old name Tool) or Enablement: **Internal only**
+   (staff tool or training material).
 5. Publicly Shareable? = No: if the Link is a public publisher or DOI page, **Share the
    public link only** (do not send the stored PDF); otherwise **Internal only**.
 6. Everything else (Official, with a public Link such as sofarocean.com, a journal, or a
