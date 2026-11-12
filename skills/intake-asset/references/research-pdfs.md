@@ -1,4 +1,4 @@
-# Research PDFs: one copy in Drive, linked from Notion (Whitepaper / Research only)
+# Research PDFs: one copy in Drive, linked from Notion (Research papers only)
 
 **Folder:** Sofar Marketing shared drive / Resource Library / Research papers
 **Folder link:** https://drive.google.com/drive/folders/1Na-_eW7X415pCbLRkVHvx2Hv6BXthTG2
@@ -20,7 +20,7 @@ from the session.
 
 ## When this applies
 
-Only for Content Type "Whitepaper / Research", and only when one of these is true:
+Only for Content Type "Research papers", and only when one of these is true:
 - The user provided the paper as a PDF (uploaded or attached).
 - The paper exists only as a PDF, with no public web page or DOI to link to.
 
