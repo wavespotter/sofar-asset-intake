@@ -17,10 +17,10 @@ inventing a new pattern.
 ## When to act
 
 Only when the Resource Library entry just created (or the existing entry the user chose to
-update) has **Content Type = "Whitepaper / Research" and Third-Party? = "Yes"**. That
+update) has **Content Type = "Research papers" and Third-Party? = "Yes"**. That
 covers journal papers, conference proceedings, preprints, theses and dissertations, and
 technical or government reports. Skip it for everything else, including Sofar blog posts
-and Sofar's own white papers (Third-Party? = No), datasets, talks and slides, articles,
+and Sofar's own white papers and reports (Guides and reports), datasets, talks and slides, articles,
 and anything Custom. A paper written by Sofar staff but published in a journal is
 Third-Party? = Yes, so it is in scope.
 
