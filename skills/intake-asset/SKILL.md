@@ -173,8 +173,13 @@ which.
 definitions and tie-breakers in `references/resource-library-schema.md`. The ones that need
 care: published in a journal or as a preprint is Research papers, whoever wrote it, while
 anything Sofar publishes itself (blog posts, white papers, savings reports, explainers) is
-Guides and reports, Product updates or News and press. About our product is a Product
-update. About a subject, even when the product appears in it, is a Guide or report.
+Guides and reports, Product updates or News and press. Product updates is only for
+something new: a launch, a new feature, a release or a what's new roundup. How the product
+works, how we built it and test results are Guides and reports. An article published on
+another site is News and press, whatever its subject, and so is a post of ours that mainly
+points to one. For a video or podcast, what is in it decides: showing the product in use or
+how to use it is Videos and podcasts, whoever made it, while an outside interview or news
+segment about Sofar is News and press.
 
 **Internal tool or Tools and demos.** Use Content Type "Internal tool" for internal web
 utilities that Sofar staff open and use rather than share (e.g. an email signature generator
