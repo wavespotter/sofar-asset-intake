@@ -66,19 +66,22 @@ status to On hub, never because of its Content Type):
   including Sofar staff. Also theses, technical or government reports, and datasets and
   supporting materials that go with research (including third-party data archives).
 - **Webinars and events**: webinar recordings and event pages.
-- **Videos and podcasts**: on-demand videos a buyer would watch to evaluate or use the
-  product (how-tos, demos, field footage, customer stories on video), plus Sofar podcasts.
-  Videos come first.
+- **Videos and podcasts**: videos and podcasts that show the product in use or how to use
+  it (how-tos, demos, field footage, customer stories on video, Sofar's own podcast),
+  whoever made them. Videos come first.
 - **Tools and demos**: customer-facing tools, dashboards, demos, configurators, calculators,
   scenario builders and live dashboards. These stay in the main library.
 - **Spec sheets**: product and sensor spec sheets, product booklets and product one-pagers.
-- **Product updates**: Sofar launches, new features and how the product works.
+- **Product updates**: what is new only: Sofar launches, new features, releases and what's
+  new roundups.
 - **Guides and reports**: in-depth Sofar content that explains a subject or shares
-  analysis: explainers, how-to guides, Sofar blog posts that summarize a paper, white
-  papers, and reports such as savings reports and fuel savings snapshots. Articles and
-  downloadable documents both belong here.
+  analysis: explainers, how-to guides, how the product works, how we built it, test
+  results, Sofar blog posts that summarize a paper, white papers, and reports such as
+  savings reports and fuel savings snapshots. Articles and downloadable documents both
+  belong here.
 - **News and press**: press releases, partnerships, funding, team stories (including team
-  Q&As), and coverage by outside media, including outside podcasts and interviews.
+  Q&As), and articles, interviews and news segments published by outside outlets,
+  including pieces Sofar wrote for an outside publication.
 
 Five internal-only types (never on the hub):
 
@@ -98,9 +101,15 @@ There is no Other option. If nothing fits, ask the user.
 **Tie-breakers:**
 - Published in a journal, conference proceedings or as a preprint is a Research paper,
   whoever wrote it. Published by Sofar, as an article or a downloadable document, is a Guide
-  or report.
-- About our product is a Product update. About a subject, even when our product appears in
-  it, is a Guide or report.
+  or report. A post on our site that gives a paper's authors and abstract is the Research
+  paper itself.
+- Ask whether it announces something new. A launch, a new feature, a release or a what's
+  new roundup is a Product update. Everything else Sofar writes is a Guide or report,
+  including how the product works, how we built it and test results.
+- Where an article is published decides its type. An article on another site is News and
+  press, whatever its subject, including pieces Sofar wrote for an outside publication. A
+  post on our site that mainly points to it (In the News category, a publisher logo, a link
+  to the full article) is News and press too.
 - One customer's story is a Customer story. A report that pools results across customers,
   like a savings report, is a Guide or report.
 - A product launch or new feature is a Product update. Anything about the company, a
@@ -108,8 +117,10 @@ There is no Other option. If nothing fits, ask the user.
 - A webinar recording stays Webinars and events, so the series lives in one place.
 - A customer story told on video is Videos and podcasts. A written customer story is
   Customer stories.
-- An outside podcast or interview with a Sofar person is News and press. Sofar's own
-  podcast is Videos and podcasts.
+- For videos and podcasts, what is in it decides. One that shows the product in use or how
+  to use it is Videos and podcasts, whoever made it (Sofar's own podcast, or a customer or
+  program video such as Backyard Buoys). An interview or news segment about Sofar by an
+  outside outlet is News and press.
 
 **Internal tool vs. Tools and demos:** ask who uses it. Internal staff utility → Internal
 tool. Something customers see or use (demo, configurator, dashboard) → Tools and demos. If
