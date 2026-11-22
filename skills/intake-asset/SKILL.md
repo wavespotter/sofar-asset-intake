@@ -14,7 +14,7 @@ description: >
   third-party research papers to the Academic publications page if not already listed,
   and saves research PDFs to Drive.
 metadata:
-  version: "0.17.0"
+  version: "0.18.0"
   author: "Sofar Ocean Marketing"
 ---
 
