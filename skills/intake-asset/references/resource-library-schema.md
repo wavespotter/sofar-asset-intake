@@ -238,10 +238,10 @@ Rules:
 
 `Waves`, `Currents`, `Water quality`, `Water level and flooding`, `Acoustic monitoring`,
 `Weather and forecasts`, `Storms and extreme events`, `Vessel performance`,
-`Emissions and regulation`, `Data and forecast accuracy`.
+`Emissions and regulation`, `Data accuracy`.
 
 Topic answers "what is this asset about?" across products and industries. The list was
-finalized on 21 November 2026 and matches the Topics collection on the website.
+finalized on 22 November 2026 and matches the Topics collection on the website.
 
 - **Waves**: wave height, period, direction and spectra, plus the surface data Spotter
   reports alongside them (barometric pressure, estimated wind). Observations, not forecasts.
@@ -257,9 +257,10 @@ finalized on 21 November 2026 and matches the Topics collection on the website.
   and how they are used to make decisions.
 - **Storms and extreme events**: hurricanes, typhoons, El Niño and other extremes, and how
   people measured or coped with them.
-- **Vessel performance**: speed and fuel models, hull fouling, wind-assisted propulsion.
+- **Vessel performance**: how ships perform (speed and fuel, hull condition and fouling,
+  wind-assisted propulsion), including how Wayfinder models vessel performance.
 - **Emissions and regulation**: CII, EU ETS and decarbonization rules for shipping.
-- **Data and forecast accuracy**: tests how accurate Sofar's data or forecasts are, compares
+- **Data accuracy**: tests how accurate Sofar's data or forecasts are, compares
   them with other systems, or uses Spotter as the trusted reference to check something else.
 
 Rules:
@@ -267,7 +268,7 @@ Rules:
   "show me resources about this." **Maximum 3.** Empty is fine.
 - Tag both Weather and forecasts and Storms and extreme events only when the asset is about
   forecasting a specific extreme event.
-- Tag Data and forecast accuracy only when testing or comparing accuracy is the point of
+- Tag Data accuracy only when testing or comparing accuracy is the point of
   the asset, never because it calls something accurate.
 - Never invent a topic. New topics are added through review, not during intake.
 - Internal tools, brand assets, decks and enablement material usually get none.
@@ -275,7 +276,7 @@ Rules:
 **During the topic switch (old option names).** The fetch in Step 1 shows the live Topic
 options. If they still use the pre-21 November names, write the old name that matches and
 never create a new option: Water level (Water level and flooding), Underwater sound
-(Acoustic monitoring), Accuracy and validation (Data and forecast accuracy). Never use
+(Acoustic monitoring), Accuracy and validation (Data accuracy). Never use
 Water temperature: tag Water quality instead.
 
 Write format: `"Topic": "[\"Storms and extreme events\",\"Waves\"]"`.
